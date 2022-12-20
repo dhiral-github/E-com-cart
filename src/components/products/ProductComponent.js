@@ -21,62 +21,10 @@ import { ExpandMore } from "@material-ui/icons";
 const ProductComponent = () => {
   const products = useSelector((state) => state.allproducts.products);
   console.log('ProductComponent useSelector==>>>>', products)
-  // <Grid container spacing={4} py={3}>
-  //     {items?.map((item) => (
-  //       <Grid item xs={12} sm={6} lg={3} key={item.id}>
-  //         <Item {...item} />
-  //       </Grid>
-  //     ))}
-  //   </Grid>
+  
   const renderList = products.map((product) => {
     const { id, title, image, price, category } = product;
-    console.log('console of ProductComponent==>>>');
-    // return (
-    //   <Grid
-    //     container
-    //     spacing={4}
-    //     py={3}
-    //     key={product.id}
-    //     style={{ display: "flex" }}
-    //   >
-    //     <Card className="animate__animated animate__fadeIn" raised>
-    //       <CardActionArea>
-    //         <Link href={`/product/${id}`}>
-    //           <CardMedia
-    //             component="img"
-    //             height="260"
-    //             image={image}
-    //             alt={id}
-    //           // onClick={handleNavigation}
-    //           />
-    //           <CardContent>
-    //             <Typography variant="body2" color="text.secondary" noWrap>
-    //               {title}
-    //             </Typography>
-    //           </CardContent>
-    //         </Link>
-    //       </CardActionArea>
-    //       <CardActions sx={{ display: "flex", justifyContent: "space-around" }}>
-    //         <Button
-    //           size="small"
-    //           color="error"
-    //         //  onClick={handleNavigation}
-    //         >
-    //           {/* <Link href={`/product/${id}`}> */}
-    //           View more
-    //           {/* </Link> */}
-    //         </Button>
-    //         <Typography
-    //           variant="subtitle2"
-    //           color="text.secondary"
-    //           align="right"
-    //         >
-    //           {`$${price}`}
-    //         </Typography>
-    //       </CardActions>
-    //     </Card>
-    //   </Grid>
-    // );
+
     return (
       <>
         <div className="col-md-3 mb-4">
