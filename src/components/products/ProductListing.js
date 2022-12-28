@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import ProductComponent from "./ProductComponent";
 import { setproducts } from "../../redux/actionCreators/productActions";
@@ -26,13 +25,15 @@ const ProductListing = () => {
   console.log("productssssssss==>>", products);
   return (
     <>
-      {Object.keys(products).length === 0 ? (
-        <div>
-          <SpinnerLoading text='Loading products...' />
-        </div>
-      ) : (
+      {
+      // Object.keys(products)?.length === 0 ? (
+      //   <div>
+      //     <SpinnerLoading text='Loading products...' />
+      //   </div>
+      // ) : (
         <ProductComponent />
-      )}
+      // )
+      }
     </>
   )
 };
