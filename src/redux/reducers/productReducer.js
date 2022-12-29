@@ -23,6 +23,7 @@ const productReducer = (state = intialState, action) => {
       return {
         ...state,
         products: payload,
+        // products: [],
         productLoading: false,
       };
     }
@@ -30,6 +31,7 @@ const productReducer = (state = intialState, action) => {
       return {
         ...state,
         products: payload,
+        // products: {},
         productLoading: false,
       };
     }

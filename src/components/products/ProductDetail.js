@@ -29,31 +29,32 @@ const ProductDetail = () => {
             <SpinnerLoading text='Loading products...' />
           </div>
         ) : (
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div>
-              <Image className="ui fluid image" style={{ width: '260px' }} src={image} />
-            </div>
-            <div style={{ width: '65%' }}>
-              <h1>{title}</h1>
-              <h2>
-                <href className="ui teal tag label">${price}</href>
-              </h2>
-              <h3 className="ui brown block header">{category}</h3>
-              <p>{description}</p>
-              <div className="ui vertical animated button" tabIndex="0">
-                <div className="hidden content">
-                  <i className="shop icon"></i>
-                </div>
 
-                <Button variant="success" onClick={addToCartItem()} >Add to Cart</Button>
+          Object.keys(products).length === 0 && !productLoading ?
+            <NoDataAvailable text='Something went wrong...' /> :
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div>
+                <Image className="ui fluid image" style={{ width: '260px' }} src={image} />
+              </div>
+              <div style={{ width: '65%' }}>
+                <h1>{title}</h1>
+                <h2>
+                  <href className="ui teal tag label">${price}</href>
+                </h2>
+                <h3 className="ui brown block header">{category}</h3>
+                <p>{description}</p>
+                <div className="ui vertical animated button" tabIndex="0">
+                  <div className="hidden content">
+                    <i className="shop icon"></i>
+                  </div>
+
+                  <Button variant="success" onClick={addToCartItem()} >Add to Cart</Button>
+                </div>
               </div>
             </div>
-          </div>
         )
       }
-      {
-        products.length === '' && <NoDataAvailable text='Something went wrong...' />
-      }
+
     </div>
   );
 };
