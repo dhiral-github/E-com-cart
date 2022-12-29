@@ -54,7 +54,8 @@ const productReducer = (state = intialState, action) => {
     case "SELECTED_PRODUCT": {
       return {
         ...state,
-        selectedProduct: payload
+        selectedProduct: payload,
+        productLoading: false,
       }
     }
     case "UPDATE_PRODUCT": {
@@ -72,6 +73,16 @@ const productReducer = (state = intialState, action) => {
       return {
         ...state,
         toastDetails: payload
+      }
+    }
+    case "DELETE_PRODUCT": {
+
+      const proState = [...state.products];
+
+      const deleteId = proState.filter((item) => item.id !== payload)
+      return {
+        ...state,
+        products: deleteId
       }
     }
     default:

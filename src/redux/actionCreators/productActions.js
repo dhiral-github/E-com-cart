@@ -29,13 +29,11 @@ export const selectedproduct = (id) => async (dispatch) => {
   dispatch(setproductLoading());
   try {
     const newsSource = await axios.get(`https://fakestoreapi.com/products/${id}`);
-    console.log('new source record:--------', newsSource)
     if (newsSource) {
       dispatch({
         type: "SELECTED_PRODUCTS",
         payload: newsSource.data,
       });
-      console.log('selectedproduct Action======>>>>>>', newsSource.data);
     }
   } catch (err) {
     // dispatch({
@@ -46,7 +44,6 @@ export const selectedproduct = (id) => async (dispatch) => {
 };
 
 export const showproductModal = (openModal) => (dispatch) => {
-  console.log('console showproductModal Action======>>>>>>', openModal);
   dispatch({
     type: "SHOW_PRODUCT_MODAL",
     payload: openModal,
@@ -130,3 +127,36 @@ export const toastProduct = (toastProDetail) => (dispatch) => {
     payload: toastProDetail
   })
 } 
+export const deleteProduct = (productId) => async(dispatch) => {
+
+  console.log("deleteProduct id ==>>>>>>>>>..........", productId);
+  try {
+    await axios.delete(`https://fakestoreapi.com/products/${productId}`)
+    .then((response) => {
+
+      if (response.status === 200) {
+        dispatch({
+          type: "DELETE_PRODUCT",
+          payload: productId
+        });
+        dispatch(toastProduct({
+          showToast: true,
+          type: 'success',
+          message: 'Product deleted successfully',
+        }))
+      }
+    })
+    .catch((err) => {
+      dispatch(toastProduct({
+        showToast: true,
+        type: 'danger',
+        message: 'Unable to delete product',
+      }))
+    })
+  } catch (err) {
+    // dispatch({
+    //   type: NEWS_SOURCE_ERROR,
+    // }); 
+    console.log("err", err);
+  }
+}

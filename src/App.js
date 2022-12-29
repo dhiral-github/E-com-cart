@@ -1,15 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
 import ProductListing from "./components/products/ProductListing";
 import ProductDetail from "./components/products/ProductDetail";
 
 function App() {
-  // const [Loading, setLoading] = useState(false)
-  const { productLoading } = useSelector((state) => state.allproducts);
-  console.log('products==>>>>123sddsdsdsddddddddd', productLoading)
-
 
   const myStyle = {
     display: 'flex',

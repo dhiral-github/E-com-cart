@@ -9,8 +9,12 @@ const ProductDetail = () => {
 
   const dispatch = useDispatch();
   const { productId } = useParams();
-  const product = useSelector((state) => state.allproducts.products);
-  const { title, image, price, category, description } = product;
+  const { products, productLoading } = useSelector((state) => state.allproducts);
+  const { title, image, price, category, description } = products;
+
+  const addToCartItem = () => {
+    console.log("addToCartItem==>>>>");
+  }
 
   useEffect(() => {
     dispatch(selectedproduct(productId));
@@ -18,7 +22,7 @@ const ProductDetail = () => {
 
   return (
     <div className="ui grid container">
-      {Object.keys(product).length === 0 ? (
+      {productLoading ? (
         <div>
           <SpinnerLoading text='Loading products...' />
         </div>
@@ -39,11 +43,12 @@ const ProductDetail = () => {
                 <i className="shop icon"></i>
               </div>
 
-              <Button variant="success" className="mx-1" >Add to Cart</Button>
+              <Button variant="success" onClick={addToCartItem()} >Add to Cart</Button>
             </div>
           </div>
         </div>
-      )}
+      )
+      }
     </div>
   );
 };
