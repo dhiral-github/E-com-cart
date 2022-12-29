@@ -10,11 +10,11 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const product = useSelector((state) => state.allproducts.products);
-  const {title, image, price, category, description } = product;
+  const { title, image, price, category, description } = product;
 
   useEffect(() => {
     dispatch(selectedproduct(productId));
-  }, [productId,dispatch])
+  }, [productId, dispatch])
 
   return (
     <div className="ui grid container">
