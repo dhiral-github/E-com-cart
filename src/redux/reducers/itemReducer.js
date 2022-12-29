@@ -4,7 +4,6 @@ const addItemReducer = (state = intialState, action) => {
   switch (action.type) {
     case "ADD_ITEM": {
       state.push(action.payload);
-      console.log("state obje:-==-=-== ", state);
       return state;
     }
     case "DELETE_ITEM": {
@@ -18,10 +17,8 @@ const addItemReducer = (state = intialState, action) => {
       const { id, firstname, lastname, mobile, middlename, email } = action.payload;
       const localState = [...state];
       const existingItem = localState.find((item) => item.id === id);
-      console.log("localState updateItem=>>>>", existingItem);
 
       // const itemIndex = localState.indexOf(existingItem);
-      // console.log("itemIndex updateItem=>>>>", itemIndex)
       if (existingItem) {
         existingItem.formData.firstname = firstname;
         existingItem.formData.lastname = lastname;
@@ -51,11 +48,9 @@ const addItemReducer = (state = intialState, action) => {
     // case 'CHECKED_ITEM':
     //     {
     //         const itemId = action.payload
-    //         console.log("CHECKED_ITEM==>>>>>>>>>>>>>>>>>>>", itemId);
     //         itemId.filter(list => {
     //             if (list === action.payload)
     //                 list = action.payload
-    //             // console.log("if Checkedddddddddddd ===>>>>", list);
 
     //         })
     //         // return itemId
@@ -75,14 +70,12 @@ const addItemReducer = (state = intialState, action) => {
       fetch(URL, { method: 'GET' })
 
         .then((response) => {
-          console.log('SHOW_API_REDUX_ITEM==>>', response);
           Promise.all(response.json())
         });
 
 
       // const localState = [...state];
       const showItem = action.payload;
-      console.log("selectedListData======>>>>", URL);
       // return {
       //   ...state,
       //   URL

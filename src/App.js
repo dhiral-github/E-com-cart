@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
@@ -10,25 +10,22 @@ function App() {
   const { productLoading } = useSelector((state) => state.allproducts);
   console.log('products==>>>>123sddsdsdsddddddddd', productLoading)
 
-  useEffect(() => {
-    // setLoading()
-  }, [])
-  
-const myStyle= {
-  display: 'flex',
-  flexFlow: 'wrap',
-}
+
+  const myStyle = {
+    display: 'flex',
+    flexFlow: 'wrap',
+  }
   return (
     <>
       <Router>
         <Navbar title="e-com-cart" />
         <div className="container p-2 bd-highlight" style={myStyle}>
-        <Routes>
-          <Route exact path="/" element={<ProductListing />} />
-          <Route exact path="/product/:productId" element={<ProductDetail />} />
-        </Routes>
-      </div>
-    </Router>
+          <Routes>
+            <Route exact path="/" element={<ProductListing />} />
+            <Route exact path="/product/:productId" element={<ProductDetail />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }

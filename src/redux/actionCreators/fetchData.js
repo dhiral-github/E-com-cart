@@ -11,8 +11,6 @@ export  function fetchProducts() {
    })
    .then(response => response.json())
    .then(response => {
-       
-       console.log('response==>>>',response);
        dispatch(showApiReduxAction(response.articles))
    })
 
@@ -43,7 +41,6 @@ export  function fetchProducts() {
     //     "https://jsonplaceholder.typicode.com/todos/1"
     //   )
     //   .then(response => {
-    //     console.log("fetchProducts response======>>>>", response);
     //     dispatch(showApiReduxAction(response));
     //   })
 

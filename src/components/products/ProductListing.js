@@ -2,38 +2,23 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductComponent from "./ProductComponent";
 import { setproducts } from "../../redux/actionCreators/productActions";
-import SpinnerLoading from "../UI/SpinnerLoading";
+import DismissibleToasts from "../UI/DismissibleToasts";
 
 const ProductListing = () => {
-  const { products } = useSelector((state) => state.allproducts);
-  console.log("products useSelector==>>", products);
+  const showToastMessage = useSelector((state) => state.allproducts.toastDetails);
   const dispatch = useDispatch();
-  // const fetchProducts = async () => {
-  //   const response = await axios
-  //     .get("https://fakestoreapi.com/products")
-  //     .catch((err) => {
-  //       console.log("err", err);
-  //     });
-  //   dispatch(setproducts(response.data));
-  // };
+  
   useEffect(() => {
     dispatch(setproducts());
-    // return () => {
-    //   // fetchProducts();
-    // };
   }, [dispatch]);
-  console.log("productssssssss==>>", products);
+  
   return (
-    <>
-      {
-      // Object.keys(products)?.length === 0 ? (
-      //   <div>
-      //     <SpinnerLoading text='Loading products...' />
-      //   </div>
-      // ) : (
+    <>      
+        {
+          showToastMessage.showToast &&
+          <DismissibleToasts  />
+        }     
         <ProductComponent />
-      // )
-      }
     </>
   )
 };

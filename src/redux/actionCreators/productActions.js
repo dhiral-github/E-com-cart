@@ -17,6 +17,7 @@ export const setproducts = () => async (dispatch) => {
       console.log('setproducts Action======>>>>>>', newsSource.data);
     }
   } catch (err) {
+    console.log('catch setproducts Action======>>>>>>');
     // dispatch({
     //   type: NEWS_SOURCE_ERROR,
     // });
@@ -60,14 +61,25 @@ export const addnewProduct = (pData) => (dispatch) => {
           dispatch({
             type: "ADD_NEW_PRODUCT",
             payload: { ...response.data, ...pData },
-          });
-          console.log('success ADD_NEW_PRODUCT action');
 
+          });
+
+          dispatch(toastProduct({
+            showToast: true,
+            type: 'success',
+            message: 'Product added successfully',
+          }))
         }
       })
-    console.log('console addnewProduct Action======>>>>>>');
+      .catch((err) => {
+        dispatch(toastProduct({
+          showToast: true,
+          type: 'danger',
+          message: 'Unable to add product',
+        }))
+      })
   } catch (err) {
-    console.error(err)
+    console.log('err==>', err)
   }
 };
 
@@ -80,19 +92,31 @@ export const selectedProduct = (selectedproduct) => (dispatch) => {
 };
 
 export const updateProduct = (product) => async (dispatch) => {
-  console.log('updateproduct===>> Action====>>>>', product.id);
+  
   const { id } = product
   try {
-    const updateProductDetail = await axios.put(`https://fakestoreapi.com/products/${id}`);
-    console.log('new source record:--------', updateProductDetail.data)
+    await axios.put(`https://fakestoreapi.com/products/${id}`)
+    .then((response) => {
 
-    if (updateProductDetail) {
-      dispatch({
-        type: "UPDATE_PRODUCT",
-        payload: product
-      });
-      console.log('UPDATE_PRODUCT Action======>>>>>>', updateProductDetail);
-    }
+      if (response.status === 200) {
+        dispatch({
+          type: "UPDATE_PRODUCT",
+          payload: product
+        });
+        dispatch(toastProduct({
+          showToast: true,
+          type: 'success',
+          message: 'Product updated successfully',
+        }))
+      }
+    })
+    .catch((err) => {
+      dispatch(toastProduct({
+        showToast: true,
+        type: 'danger',
+        message: 'Unable to update product',
+      }))
+    })
   } catch (err) {
     // dispatch({
     //   type: NEWS_SOURCE_ERROR,
@@ -100,3 +124,9 @@ export const updateProduct = (product) => async (dispatch) => {
     console.log("err", err);
   }
 }
+export const toastProduct = (toastProDetail) => (dispatch) => {
+  dispatch({
+    type: "TOAST_PRODUCT_MESSAGE",
+    payload: toastProDetail
+  })
+} 

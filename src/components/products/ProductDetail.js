@@ -1,17 +1,6 @@
 import React, { useEffect } from "react";
+import { Button, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Avatar, Card, IconButton, Link } from "@material-ui/core";
-import {
-  Button,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Collapse,
-  Grid,
-  Typography,
-} from "@mui/material";
 import { useParams } from "react-router-dom";
 import { selectedproduct } from "../../redux/actionCreators/productActions";
 import SpinnerLoading from "../UI/SpinnerLoading";
@@ -21,13 +10,11 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const product = useSelector((state) => state.allproducts.products);
-  const { id, title, image, price, category, description } = product;
-  console.log('product of useselector ===>>>', product);
+  const {title, image, price, category, description } = product;
 
   useEffect(() => {
-    console.log('ts on did mount------', productId);
     dispatch(selectedproduct(productId));
-  }, [])
+  }, [productId,dispatch])
 
   return (
     <div className="ui grid container">
@@ -36,27 +23,23 @@ const ProductDetail = () => {
           <SpinnerLoading text='Loading products...' />
         </div>
       ) : (
-        <div className="ui placeholder segment">
-          <div className="ui two column stackable center aligned grid">
-            <div className="ui vertical divider">AND</div>
-            <div className="middle aligned row">
-              <div className="column lp">
-                <img className="ui fluid image" src={image} />
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div>
+            <Image className="ui fluid image" style={{ width: '260px' }} src={image} />
+          </div>
+          <div style={{ width: '65%' }}>
+            <h1>{title}</h1>
+            <h2>
+              <href className="ui teal tag label">${price}</href>
+            </h2>
+            <h3 className="ui brown block header">{category}</h3>
+            <p>{description}</p>
+            <div className="ui vertical animated button" tabIndex="0">
+              <div className="hidden content">
+                <i className="shop icon"></i>
               </div>
-              <div className="column rp">
-                <h1>{title}</h1>
-                <h2>
-                  <href className="ui teal tag label">${price}</href>
-                </h2>
-                <h3 className="ui brown block header">{category}</h3>
-                <p>{description}</p>
-                <div className="ui vertical animated button" tabIndex="0">
-                  <div className="hidden content">
-                    <i className="shop icon"></i>
-                  </div>
-                  <div className="visible content">Add to Cart</div>
-                </div>
-              </div>
+
+              <Button variant="success" className="mx-1" >Add to Cart</Button>
             </div>
           </div>
         </div>

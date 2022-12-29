@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import AddProductModal from "./AddProductModal";
 import ListItem from "./ListItem";
@@ -7,19 +7,17 @@ import { showproductModal } from '../redux/actionCreators/productActions';
 export default function Navbar(props) {
   const dispatch = useDispatch();
   let location = useLocation();
-  
+
   useEffect(() => {
     return () => {
-      console.log('location==>', location.pathname);
     };
   }, [location])
 
   const handleClick = () => {
-    console.log('console handleClick==>>');
     dispatch(showproductModal(true),
     )
   }
- 
+
   const listItemArray = [
     {
       label: "Home",
@@ -68,8 +66,6 @@ export default function Navbar(props) {
             ))}
 
             <AddProductModal />
-            {/* <AddProductModal isShow={modalUse} onClose={onClose}/> */}
-
           </ul>
         </div>
       </div>

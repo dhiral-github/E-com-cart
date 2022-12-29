@@ -2,7 +2,13 @@ const intialState = {
   products: [],
   productLoading: false,
   showProductModal: false,
-  selectedProduct: {}
+  selectedProduct: {},
+  toastMessage: '',
+  toastDetails: {
+    showToast: false,
+    type: 'success',
+    message: '',
+  }
 };
 
 const productReducer = (state = intialState, action) => {
@@ -35,10 +41,14 @@ const productReducer = (state = intialState, action) => {
     }
 
     case "ADD_NEW_PRODUCT": {
-      const productData = state.products.concat(payload);
+      const productData = [...state.products];
+      productData.splice(0, 0, payload);
+      // productData.unshift(payload);
+      // const productData = [payload].concat(state.products);
       return {
         ...state,
         products: productData,
+
       }
     }
     case "SELECTED_PRODUCT": {
@@ -48,17 +58,20 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "UPDATE_PRODUCT": {
-      console.log("UPDATE_PRODUCT Reducer state=>>>>", state);
-      console.log("UPDATE_PRODUCT Reducer payload=>>>>", payload);
       const { id } = payload;
 
       const proState = [...state.products];
       const findObject = proState.findIndex((item) => item.id === id)
       proState.splice(findObject, 1, payload)
-      console.log("proState====.>>>>>", proState);
       return {
         ...state,
         products: proState,
+      }
+    }
+    case "TOAST_PRODUCT_MESSAGE": {
+      return {
+        ...state,
+        toastDetails: payload
       }
     }
     default:

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { showproductModal, addnewProduct, selectedProduct, updateProduct } from '../redux/actionCreators/productActions';
@@ -6,18 +6,11 @@ import { useDispatch } from 'react-redux';
 
 const AddProductModal = () => {
   const [formData, setformData] = useState({
-    // title: "",
-    // image: "",
-    // price: "",
-    // category: "",
-    // description: "",
   });
-
+  const [toast, setToast] = useState(true);
   const dispatch = useDispatch();
   const showProductModal = useSelector((state) => state.allproducts.showProductModal);
   const product = useSelector((state) => state.allproducts.selectedProduct);
-  // const { id, title, image, price, category, description } = product;
-  console.log("console  props==>>>", product);
 
   const handleClose = () => {
     dispatch(showproductModal(false))
@@ -30,17 +23,15 @@ const AddProductModal = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log('formData==>>', { [e.target.name]: e.target.value, });
+    
   };
-  console.log("console formData==>>>", formData,product);
 
-
-  const handleSave = (productUpdate) => {
-    if (Object.keys(product).length > 0 ) {
-      console.log("console handleSave update==>>>", product);
+   const handleSave = (productUpdate) => {
+    if (Object.keys(product).length > 0) {
+   
       dispatch(updateProduct(productUpdate));
-      // setformData({});
       handleClose();
+      setToast(!toast)
     } else {
       dispatch(addnewProduct({
         id: new Date().getTime().toString(),
@@ -49,12 +40,11 @@ const AddProductModal = () => {
       setformData({});
       handleClose();
       dispatch(selectedProduct({}));
-      // dispatch(updateProduct({}));
-      console.log("console handleSave insert ==>>>", formData);
+      setToast(!toast)
     }
   }
   useEffect(() => {
-    if(product){
+    if (product) {
       setformData(product);
     }
   }, [product])
