@@ -14,10 +14,8 @@ export const setproducts = () => async (dispatch) => {
         type: "SET_PRODUCTS",
         payload: newsSource.data,
       });
-      console.log('setproducts Action======>>>>>>', newsSource.data);
     }
   } catch (err) {
-    console.log('catch setproducts Action======>>>>>>');
     // dispatch({
     //   type: NEWS_SOURCE_ERROR,
     // });
@@ -81,7 +79,6 @@ export const addnewProduct = (pData) => (dispatch) => {
 };
 
 export const selectedProduct = (selectedproduct) => (dispatch) => {
-  console.log('console selectedProduct Action======>>>>>>', selectedproduct);
   dispatch({
     type: "SELECTED_PRODUCT",
     payload: selectedproduct,
@@ -128,8 +125,6 @@ export const toastProduct = (toastProDetail) => (dispatch) => {
   })
 } 
 export const deleteProduct = (productId) => async(dispatch) => {
-
-  console.log("deleteProduct id ==>>>>>>>>>..........", productId);
   try {
     await axios.delete(`https://fakestoreapi.com/products/${productId}`)
     .then((response) => {

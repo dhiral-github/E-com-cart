@@ -8,7 +8,7 @@ const ProductComponent = () => {
   const dispatch = useDispatch();
   const { products, productLoading } = useSelector((state) => state.allproducts);
 
-  const handleClick = (id) => {
+  const handleEdit = (id) => {
     const selectedObj = products.find((prodObj) => (prodObj.id === id));
     dispatch(showproductModal(true))
     dispatch(selectedProduct(selectedObj))
@@ -19,7 +19,7 @@ const ProductComponent = () => {
   return (
     productLoading ?
       <div>
-        <SpinnerLoading />
+        <SpinnerLoading text='Loading products...' />
       </div> :
       products.map((product, index) => {
         const { id, title, image, price } = product;
@@ -31,13 +31,14 @@ const ProductComponent = () => {
                 <h5 className="card-title mb-0">{title?.substring(0, 12)}...</h5>
                 <p className="card-text lead fw-bold">${price}</p>
                 <Button variant="outline-dark" href={`/product/${id}`}> Buy now</Button>
-                <Button variant="outline-dark" className="mx-1" onClick={() => handleClick(id)} > Edit </Button>
+                <Button variant="outline-dark" className="mx-1" onClick={() => handleEdit(id)} > Edit </Button>
                 <Button variant="outline-dark" className="mx-1" onClick={() => handleDelete(id)} > Delete </Button>
               </div>
             </div>
           </div>
         )
-      })
+      }
+      )
   );
 };
 
