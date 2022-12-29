@@ -86,31 +86,31 @@ export const selectedProduct = (selectedproduct) => (dispatch) => {
 };
 
 export const updateProduct = (product) => async (dispatch) => {
-  
+
   const { id } = product
   try {
     await axios.put(`https://fakestoreapi.com/products/${id}`)
-    .then((response) => {
+      .then((response) => {
 
-      if (response.status === 200) {
-        dispatch({
-          type: "UPDATE_PRODUCT",
-          payload: product
-        });
+        if (response.status === 200) {
+          dispatch({
+            type: "UPDATE_PRODUCT",
+            payload: product
+          });
+          dispatch(toastProduct({
+            showToast: true,
+            type: 'success',
+            message: 'Product updated successfully',
+          }))
+        }
+      })
+      .catch((err) => {
         dispatch(toastProduct({
           showToast: true,
-          type: 'success',
-          message: 'Product updated successfully',
+          type: 'danger',
+          message: 'Unable to update product',
         }))
-      }
-    })
-    .catch((err) => {
-      dispatch(toastProduct({
-        showToast: true,
-        type: 'danger',
-        message: 'Unable to update product',
-      }))
-    })
+      })
   } catch (err) {
     // dispatch({
     //   type: NEWS_SOURCE_ERROR,
@@ -123,31 +123,31 @@ export const toastProduct = (toastProDetail) => (dispatch) => {
     type: "TOAST_PRODUCT_MESSAGE",
     payload: toastProDetail
   })
-} 
-export const deleteProduct = (productId) => async(dispatch) => {
+}
+export const deleteProduct = (productId) => async (dispatch) => {
   try {
     await axios.delete(`https://fakestoreapi.com/products/${productId}`)
-    .then((response) => {
+      .then((response) => {
 
-      if (response.status === 200) {
-        dispatch({
-          type: "DELETE_PRODUCT",
-          payload: productId
-        });
+        if (response.status === 200) {
+          dispatch({
+            type: "DELETE_PRODUCT",
+            payload: productId
+          });
+          dispatch(toastProduct({
+            showToast: true,
+            type: 'success',
+            message: 'Product deleted successfully',
+          }))
+        }
+      })
+      .catch((err) => {
         dispatch(toastProduct({
           showToast: true,
-          type: 'success',
-          message: 'Product deleted successfully',
+          type: 'danger',
+          message: 'Unable to delete product',
         }))
-      }
-    })
-    .catch((err) => {
-      dispatch(toastProduct({
-        showToast: true,
-        type: 'danger',
-        message: 'Unable to delete product',
-      }))
-    })
+      })
   } catch (err) {
     // dispatch({
     //   type: NEWS_SOURCE_ERROR,
