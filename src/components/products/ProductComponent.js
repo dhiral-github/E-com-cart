@@ -35,7 +35,11 @@ const ProductComponent = () => {
                   <div className="card-body">
                     <h5 className="card-title mb-0">{title?.substring(0, 12)}...</h5>
                     <p className="card-text lead fw-bold">${price}</p>
-                    <Link variant="outline-dark" to={`/product/${id}`}> Buy now</Link>
+                    <Link to={`/product/${id}`}>
+                      <Button variant="outline-dark" >
+                        Buy now
+                      </Button>
+                    </Link>
                     <Button variant="outline-dark" className="mx-1" onClick={() => handleEdit(id)} > Edit </Button>
                     <Button variant="outline-dark" className="mx-1" onClick={() => handleDelete(id)} > Delete </Button>
                   </div>
@@ -46,7 +50,7 @@ const ProductComponent = () => {
         )
       }
       {
-       products.length === 0 && !productLoading && <NoDataAvailable text='Something went wrong...' />
+        products.length === 0 && !productLoading && <NoDataAvailable text='Something went wrong...' />
       }
     </>
   );
