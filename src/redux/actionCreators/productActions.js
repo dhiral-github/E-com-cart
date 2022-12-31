@@ -85,11 +85,11 @@ export const selectedProduct = (selectedproduct) => (dispatch) => {
   })
 };
 
-export const updateProduct = (product) => async (dispatch) => {
+export const updateProduct = (product) => (dispatch) => {
 
   const { id } = product
   try {
-    await axios.put(`https://fakestoreapi.com/products/${id}`)
+    axios.put(`https://fakestoreapi.com/products/${id}`)
       .then((response) => {
 
         if (response.status === 200) {
@@ -124,9 +124,9 @@ export const toastProduct = (toastProDetail) => (dispatch) => {
     payload: toastProDetail
   })
 }
-export const deleteProduct = (productId) => async (dispatch) => {
+export const deleteProduct = (productId) => (dispatch) => {
   try {
-    await axios.delete(`https://fakestoreapi.com/products/${productId}`)
+    axios.delete(`https://fakestoreapi.com/products/${productId}`)
       .then((response) => {
 
         if (response.status === 200) {
@@ -146,6 +146,37 @@ export const deleteProduct = (productId) => async (dispatch) => {
           showToast: true,
           type: 'danger',
           message: 'Unable to delete product',
+        }))
+      })
+  } catch (err) {
+    // dispatch({
+    //   type: NEWS_SOURCE_ERROR,
+    // }); 
+    console.log("err", err);
+  }
+}
+export const addToCart = (cardData) => (dispatch) => {
+  console.log("ADD_TO_CART==>>>Action", cardData);
+  try {
+    axios.post(`https://fakestoreapi.com/carts`)
+      .then((response) => {
+
+        if (response.status === 200) {
+          dispatch({
+            type: "ADD_TO_CART",
+            payload: cardData
+          });
+          dispatch(toastProduct({
+            showToast: true,
+            type: 'success',
+            message: 'Cart item added successfully'
+          }))
+        }
+      })
+      .catch((err) => {
+        dispatch(toastProduct({
+          showToast: true,
+          type: 'danger',
         }))
       })
   } catch (err) {

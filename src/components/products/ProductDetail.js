@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { selectedproduct } from "../../redux/actionCreators/productActions";
+import { selectedproduct, addToCart } from "../../redux/actionCreators/productActions";
 import NoDataAvailable from "../UI/NoDataAvailable";
 import SpinnerLoading from "../UI/SpinnerLoading";
 
@@ -10,11 +10,12 @@ const ProductDetail = () => {
 
   const dispatch = useDispatch();
   const { productId } = useParams();
-  const { products, productLoading } = useSelector((state) => state.allproducts);
+  const { products, productLoading, numberCart } = useSelector((state) => state.allproducts);
   const { title, image, price, category, description } = products;
 
-  const addToCartItem = () => {
-    // console.log("addToCartItem==>>>>");
+  const addToCartItem = (products) => {
+    console.log("addToCartItem==>>>>", numberCart);
+    dispatch(addToCart(products))
   }
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const ProductDetail = () => {
                     <i className="shop icon"></i>
                   </div>
 
-                  <Button variant="success" onClick={addToCartItem()} >Add to Cart</Button>
+                  <Button variant="success" onClick={() => addToCartItem(products)} >Add to Cart</Button>
                 </div>
               </div>
             </div>

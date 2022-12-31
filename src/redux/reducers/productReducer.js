@@ -8,7 +8,9 @@ const intialState = {
     showToast: false,
     type: 'success',
     message: '',
-  }
+  },
+  numberCart: 0,
+  Carts: [],
 };
 
 const productReducer = (state = intialState, action) => {
@@ -58,6 +60,25 @@ const productReducer = (state = intialState, action) => {
         ...state,
         selectedProduct: payload,
         productLoading: false,
+      }
+    }
+    case "ADD_TO_CART": {
+      console.log("ADD_TO_CART==>>>Reducer state",state.numberCart);
+      console.log("ADD_TO_CART==>>>Reducer payload",payload);
+      if (state.numberCart > 0) {
+        let cart = {
+          id: payload.id,
+          title: payload.title,
+          image: payload.image,
+          price: payload.price,
+          category: payload.category,
+          description: payload.description,
+        }
+        state.Carts.push(cart);
+      }
+      return {
+        ...state,
+        numberCart: state.numberCart + 1
       }
     }
     case "UPDATE_PRODUCT": {
