@@ -3,6 +3,7 @@ import { Button, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectedproduct, addToCart } from "../../redux/actionCreators/productActions";
+import DismissibleToasts from "../UI/DismissibleToasts";
 import NoDataAvailable from "../UI/NoDataAvailable";
 import SpinnerLoading from "../UI/SpinnerLoading";
 
@@ -12,7 +13,8 @@ const ProductDetail = () => {
   const { productId } = useParams();
   const { products, productLoading, numberCart } = useSelector((state) => state.allproducts);
   const { title, image, price, category, description } = products;
-
+  const showToastMessage = useSelector((state) => state.allproducts.toastDetails);
+  
   const addToCartItem = (products) => {
     console.log("addToCartItem==>>>>", numberCart);
     dispatch(addToCart(products))
@@ -24,6 +26,10 @@ const ProductDetail = () => {
 
   return (
     <div className="ui grid container">
+      {
+        showToastMessage.showToast &&
+        <DismissibleToasts />
+      }
       {
         productLoading ? (
           <div>
