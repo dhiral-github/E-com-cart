@@ -11,11 +11,10 @@ const ProductDetail = () => {
 
   const dispatch = useDispatch();
   const { productId } = useParams();
-  const { selectedBuyNowProduct, productLoading, numberCart, toastDetails } = useSelector((state) => state.allproducts);
+  const { selectedBuyNowProduct, productLoading, toastDetails } = useSelector((state) => state.allproducts);
   const { title, image, price, category, description } = selectedBuyNowProduct;
 
   const addToCartItem = (products) => {
-    console.log("addToCartItem==>>>>", numberCart);
     dispatch(addToCart(products))
   }
 
