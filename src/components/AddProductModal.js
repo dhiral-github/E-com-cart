@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { showproductModal, addnewProduct, selectedProduct, updateProduct } from '../redux/actionCreators/productActions';
+import { showproductModal, addnewProduct, updateProduct, selectedProduct } from '../redux/actionCreators/productActions';
 import { useDispatch } from 'react-redux';
 
 const AddProductModal = () => {
@@ -9,7 +9,7 @@ const AddProductModal = () => {
   });
   const [toast, setToast] = useState(true);
   const dispatch = useDispatch();
-  const showProductModal = useSelector((state) => state.allproducts.showProductModal);
+  const {showProductModal} = useSelector((state) => state.allproducts);
   const product = useSelector((state) => state.allproducts.selectedProduct);
 
   const handleClose = () => {

@@ -186,3 +186,34 @@ export const addToCart = (cardData) => (dispatch) => {
     console.log("err", err);
   }
 }
+export const removeCartItem = (id) => (dispatch) => {
+  console.log("REMOVE_TO_CART==>>>Action", id);
+  try {
+    axios.delete(`https://fakestoreapi.com/carts/${id}`)
+      .then((response) => {
+
+        if (response.status === 200) {
+          dispatch({
+            type: "DELETE_TO_CART",
+            payload: id
+          });
+          dispatch(toastProduct({
+            showToast: true,
+            type: 'success',
+            message: 'Cart item deleted successfully'
+          }))
+        }
+      })
+      .catch((err) => {
+        dispatch(toastProduct({
+          showToast: true,
+          type: 'danger',
+        }))
+      })
+  } catch (err) {
+    // dispatch({
+    //   type: NEWS_SOURCE_ERROR,
+    // }); 
+    console.log("err", err);
+  }
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { showproductModal, selectedProduct, deleteProduct } from '../../redux/actionCreators/productActions';
+import { showproductModal, deleteProduct, selectedProduct } from '../../redux/actionCreators/productActions';
 import NoDataAvailable from "../UI/NoDataAvailable";
 import SpinnerLoading from "../UI/SpinnerLoading";
 
@@ -26,7 +26,7 @@ const ProductComponent = () => {
             <SpinnerLoading text='Loading products...' />
           </div>
         ) : (
-          products.map((product, index) => {
+          products?.map((product, index) => {
             const { id, title, image, price } = product;
             return (
               <div className="col-md-3 mb-4" key={index}>

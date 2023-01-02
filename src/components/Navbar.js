@@ -3,15 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import AddProductModal from "./AddProductModal";
 import ListItem from "./ListItem";
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, showproductModal } from '../redux/actionCreators/productActions';
-import AddToCart from "./UI/AddToCart";
+import { showproductModal } from '../redux/actionCreators/productActions';
 
 export default function Navbar(props) {
   const dispatch = useDispatch();
   let location = useLocation();
 
   const cartNumer = useSelector((state) => state.allproducts.numberCart)
-  console.log('handleCartss==>>>', cartNumer);
+  
   useEffect(() => {
     return () => {
     };
@@ -22,17 +21,14 @@ export default function Navbar(props) {
     )
   }
   const handleCarts = () => {
-
-    console.log('handleCarts==>>>');
-    // dispatch(addToCart())
-
   }
 
   const listItemArray = [
     {
       label: "Home",
-      path: "/",
-      className: "nav-link"
+      path: "home",
+      className: "nav-link",
+      onClick: handleCarts,
     },
     {
       label: "Add product",
@@ -52,7 +48,7 @@ export default function Navbar(props) {
       className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
     >
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/home">
           {props.title}
         </Link>
         <button

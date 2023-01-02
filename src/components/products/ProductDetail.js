@@ -11,10 +11,9 @@ const ProductDetail = () => {
 
   const dispatch = useDispatch();
   const { productId } = useParams();
-  const { products, productLoading, numberCart } = useSelector((state) => state.allproducts);
-  const { title, image, price, category, description } = products;
-  const showToastMessage = useSelector((state) => state.allproducts.toastDetails);
-  
+  const { selectedBuyNowProduct, productLoading, numberCart, toastDetails } = useSelector((state) => state.allproducts);
+  const { title, image, price, category, description } = selectedBuyNowProduct;
+
   const addToCartItem = (products) => {
     console.log("addToCartItem==>>>>", numberCart);
     dispatch(addToCart(products))
@@ -27,7 +26,7 @@ const ProductDetail = () => {
   return (
     <div className="ui grid container">
       {
-        showToastMessage.showToast &&
+        toastDetails.showToast &&
         <DismissibleToasts />
       }
       {
@@ -37,7 +36,7 @@ const ProductDetail = () => {
           </div>
         ) : (
 
-          Object.keys(products).length === 0 && !productLoading ?
+          Object.keys(selectedBuyNowProduct).length === 0 && !productLoading ?
             <NoDataAvailable text='Something went wrong...' /> :
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <div>
@@ -54,8 +53,7 @@ const ProductDetail = () => {
                   <div className="hidden content">
                     <i className="shop icon"></i>
                   </div>
-
-                  <Button variant="success" onClick={() => addToCartItem(products)} >Add to Cart</Button>
+                  <Button variant="success" onClick={() => addToCartItem(selectedBuyNowProduct)} >Add to Cart</Button>
                 </div>
               </div>
             </div>

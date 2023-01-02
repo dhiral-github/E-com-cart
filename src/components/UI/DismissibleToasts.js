@@ -5,10 +5,10 @@ import { toastProduct } from "../../redux/actionCreators/productActions"
 const DismissibleToasts = () => {
   const dispatch = useDispatch();
 
-  const showToastMessage = useSelector((state) => state.allproducts.toastDetails);
+  const { toastDetails } = useSelector((state) => state.allproducts);
 
   useEffect(() => {
-    if (showToastMessage.showToast) {
+    if (toastDetails.showToast) {
       setTimeout(() => {
         dispatch(toastProduct({
           showToast: false,
@@ -17,15 +17,15 @@ const DismissibleToasts = () => {
         }))
       }, 3000);
     }
-  }, [dispatch, showToastMessage])
+  }, [dispatch, toastDetails])
   return (
     <Row
       style={{ position: 'fixed', right: 0, top: '90px', zIndex: 999, color: 'white' }}
     >
       <Col >
-        <Toast show={showToastMessage.showToast} bg={showToastMessage.type}>
+        <Toast show={toastDetails.showToast} bg={toastDetails.type}>
 
-          <Toast.Body>{showToastMessage.message}</Toast.Body>
+          <Toast.Body>{toastDetails.message}</Toast.Body>
         </Toast>
       </Col>
 

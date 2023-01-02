@@ -5,20 +5,20 @@ import { setproducts } from "../../redux/actionCreators/productActions";
 import DismissibleToasts from "../UI/DismissibleToasts";
 
 const ProductListing = () => {
-  const showToastMessage = useSelector((state) => state.allproducts.toastDetails);
+  const { toastDetails } = useSelector((state) => state.allproducts);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(setproducts());
   }, [dispatch]);
-  
+
   return (
-    <>      
-        {
-          showToastMessage.showToast &&
-          <DismissibleToasts  />
-        }     
-        <ProductComponent />
+    <>
+      {
+        toastDetails.showToast &&
+        <DismissibleToasts />
+      }
+      <ProductComponent />
     </>
   )
 };

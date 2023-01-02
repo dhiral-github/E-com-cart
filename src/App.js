@@ -17,7 +17,7 @@ function App() {
         <Navbar title="e-com-cart" />
         <div className="container p-2 bd-highlight" style={myStyle}>
           <Routes>
-            <Route exact path="/" element={<ProductListing />} />
+            <Route exact path="/home" element={<ProductListing />} />
             <Route exact path="/product/:productId" element={<ProductDetail />} />
             <Route exact path="/:carts" element={<AddToCart />} />
           </Routes>

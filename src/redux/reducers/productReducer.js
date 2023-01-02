@@ -3,6 +3,7 @@ const intialState = {
   productLoading: false,
   showProductModal: false,
   selectedProduct: {},
+  selectedBuyNowProduct: {},
   toastMessage: '',
   toastDetails: {
     showToast: false,
@@ -32,7 +33,7 @@ const productReducer = (state = intialState, action) => {
     case "SELECTED_PRODUCTS": {
       return {
         ...state,
-        products: payload,
+        selectedBuyNowProduct: payload,
         // products: {},
         productLoading: false,
       };
@@ -71,6 +72,14 @@ const productReducer = (state = intialState, action) => {
         numberCart: productData.length,
       }
     }
+    case "DELETE_TO_CART": {
+      const proState = [...state.carts];
+      const deleteId = proState.filter((item) => item.id !== payload)
+      return {
+        ...state,
+        carts: deleteId
+      }
+    }
     case "UPDATE_PRODUCT": {
       const { id } = payload;
 
@@ -98,6 +107,18 @@ const productReducer = (state = intialState, action) => {
         products: deleteId
       }
     }
+    // addToCart: (state, action) => {
+    //   const item = action.payload;
+    //   const isItemExist = state.cartItems.find((i) => i.id === item.id);
+
+    //   if (isItemExist) {
+    //     state.cartItems.forEach((i) => {
+    //       if (i.id === item.id) i.quantity += 1;
+    //     });
+    //   } else {
+    //     state.cartItems.push(item);
+    //   }
+    // },
     default:
       return state;
   }
