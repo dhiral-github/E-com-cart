@@ -16,9 +16,6 @@ export const setproducts = () => async (dispatch) => {
       });
     }
   } catch (err) {
-    // dispatch({
-    //   type: NEWS_SOURCE_ERROR,
-    // });
     console.log("err", err);
   }
 };
@@ -34,9 +31,6 @@ export const selectedproduct = (id) => async (dispatch) => {
       });
     }
   } catch (err) {
-    // dispatch({
-    //   type: NEWS_SOURCE_ERROR,
-    // }); 
     console.log("err", err);
   }
 };
@@ -112,9 +106,6 @@ export const updateProduct = (product) => (dispatch) => {
         }))
       })
   } catch (err) {
-    // dispatch({
-    //   type: NEWS_SOURCE_ERROR,
-    // }); 
     console.log("err", err);
   }
 }
@@ -149,9 +140,6 @@ export const deleteProduct = (productId) => (dispatch) => {
         }))
       })
   } catch (err) {
-    // dispatch({
-    //   type: NEWS_SOURCE_ERROR,
-    // }); 
     console.log("err", err);
   }
 }
@@ -180,9 +168,6 @@ export const addToCart = (cardData) => (dispatch) => {
         }))
       })
   } catch (err) {
-    // dispatch({
-    //   type: NEWS_SOURCE_ERROR,
-    // }); 
     console.log("err", err);
   }
 }
@@ -211,9 +196,6 @@ export const removeCartItem = (id) => (dispatch) => {
         }))
       })
   } catch (err) {
-    // dispatch({
-    //   type: NEWS_SOURCE_ERROR,
-    // }); 
     console.log("err", err);
   }
 }

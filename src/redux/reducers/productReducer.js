@@ -64,14 +64,30 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "ADD_TO_CART": {
-      const productData = [...state.carts];
-      productData.push(payload);
+      const productData = state.carts;
+      const isItemExist = productData.find((i) => i.id === payload.id);
+
+      if (!isItemExist) {
+        productData.push(payload);
+      }
+
+      productData.forEach((i) => {
+        if (!i['quantity']) {
+          i["quantity"] = 1;
+        } else {
+          if (i.id === payload.id) {
+            i.quantity += 1;
+          }
+        }
+      });
+
       return {
         ...state,
         carts: productData,
         numberCart: productData.length,
       }
     }
+
     case "DELETE_TO_CART": {
       const proState = [...state.carts];
       const deleteId = proState.filter((item) => item.id !== payload)
@@ -107,18 +123,7 @@ const productReducer = (state = intialState, action) => {
         products: deleteId
       }
     }
-    // addToCart: (state, action) => {
-    //   const item = action.payload;
-    //   const isItemExist = state.cartItems.find((i) => i.id === item.id);
 
-    //   if (isItemExist) {
-    //     state.cartItems.forEach((i) => {
-    //       if (i.id === item.id) i.quantity += 1;
-    //     });
-    //   } else {
-    //     state.cartItems.push(item);
-    //   }
-    // },
     default:
       return state;
   }

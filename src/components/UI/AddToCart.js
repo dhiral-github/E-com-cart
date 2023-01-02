@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeCartItem } from '../../redux/actionCreators/productActions'
@@ -25,11 +25,12 @@ const AddToCart = () => {
         <tbody>
           {
             carts.map((item, index) => {
-              const { id, title, image, price, category } = item;
+              const { id, title, image, price, category, quantity } = item;
               return (
                 <div style={{ display: 'flex' }} key={index}>
                   <div>
                     <Image style={{ width: '100px' }} src={image} />
+                    <h3>{quantity}</h3>
                   </div>
                   <div style={{ width: '55%' }}>
                     <h4>
