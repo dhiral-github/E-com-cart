@@ -11,7 +11,13 @@ const intialState = {
     message: '',
   },
   numberCart: 0,
-  carts: [],
+  carts: {
+    cartsItem: [],
+    cartsDetail: {
+      totalPrice: 0
+    },
+  },
+
 };
 
 const productReducer = (state = intialState, action) => {
@@ -63,15 +69,15 @@ const productReducer = (state = intialState, action) => {
         productLoading: false,
       }
     }
+
     case "ADD_TO_CART": {
-      const productData = state.carts;
-      const isItemExist = productData.find((i) => i.id === payload.id);
-
+      const { cartsItem } = state.carts;
+      const isItemExist = cartsItem.find((i) => i.id === payload.id);
+      let cartTotalPrice = 0;
       if (!isItemExist) {
-        productData.push(payload);
+        cartsItem.push(payload);
       }
-
-      productData.forEach((i) => {
+      cartsItem.forEach((i) => {
         if (!i['quantity']) {
           i["quantity"] = 1;
         } else {
@@ -79,26 +85,43 @@ const productReducer = (state = intialState, action) => {
             i.quantity += 1;
           }
         }
+        cartTotalPrice += i.price*i.quantity;
       });
 
       return {
         ...state,
-        carts: productData,
-        numberCart: productData.length,
+        carts: {
+          cartsItem: cartsItem,
+          cartsDetail: {
+            totalPrice: Number(cartTotalPrice.toFixed(2)),
+          },
+        },
+        numberCart: cartsItem.length,
       }
     }
 
     case "DELETE_TO_CART": {
-      const proState = [...state.carts];
-      const deleteId = proState.filter((item) => item.id !== payload)
+      const proState = [...state.carts.cartsItem];
+      const remainProducts = proState.filter((item) => item.id !== payload)
+
+      const remainTotalPrice = remainProducts.reduce((total, currentValue) => {
+        return total + currentValue.price * currentValue.quantity;
+      },0)
+
       return {
         ...state,
-        carts: deleteId
+        carts: {
+          ...state.carts,
+          cartsItem: remainProducts,
+          cartsDetail: {
+            ...state.carts.cartsDetail,
+            totalPrice: Number(remainTotalPrice.toFixed(2)),
+          }
+        }
       }
     }
     case "UPDATE_PRODUCT": {
       const { id } = payload;
-
       const proState = [...state.products];
       const findObject = proState.findIndex((item) => item.id === id)
       proState.splice(findObject, 1, payload)
