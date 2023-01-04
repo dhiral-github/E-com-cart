@@ -28,7 +28,6 @@ const ProductComponent = () => {
         ) : (
           products?.map((product, index) => {
             const { id, title, image, price } = product;
-            console.log('product==>>>>>>> data image',product.image);
             return (
               <div className="col-md-3 mb-4" key={index}>
                 <div className="card h-100 text-center p-4" >

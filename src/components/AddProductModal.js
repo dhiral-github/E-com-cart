@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { showproductModal, addnewProduct, updateProduct, selectedProduct,addnewProductImage } from '../redux/actionCreators/productActions';
+import { showproductModal, addnewProduct, updateProduct, selectedProduct } from '../redux/actionCreators/productActions';
 import { useDispatch } from 'react-redux';
 
 const AddProductModal = () => {
@@ -18,29 +18,17 @@ const AddProductModal = () => {
 
   const handleChange = (e) => {
     // debugger
-    const files = e.target.files;
     setformData({
       ...formData,
-      [e.target.name]: e.target.value,
-      pictureAsFile: e.target.files[0]
+      [e.target.name]: e.target.name === 'image' ?  URL.createObjectURL(e.target.files[0]) : e.target.value,
     });
-    formData.append('img',files[0])
-
-    const images = e.target.files;
-    const formDataFile = new FormData();
-
-    for (let image of images) {
-      formData.append('image', image);
-    }
   };
- 
 
   const handleSave = (productUpdate) => {
-     
-    const formDataFileUpload = new FormData();
-    formData.append("file", formData.pictureAsFile);
+      
+      const formDataFileUpload = new FormData();
+      formDataFileUpload.append("file", formData);
 
-    console.log(formData.pictureAsFile);
     if (Object.keys(product).length > 0) {
 
       dispatch(updateProduct(productUpdate));
@@ -51,13 +39,7 @@ const AddProductModal = () => {
         id: new Date().getTime().toString(),
         ...productUpdate,
       }));
-      dispatch(addnewProductImage({
-        id: new Date().getTime().toString(),
-        ...productUpdate,
-        ...formDataFileUpload,
 
-      }));
-      console.log('addnewProduct==>>>', formData);
       setformData({});
       handleClose();
       dispatch(selectedProduct({}));
