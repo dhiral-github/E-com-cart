@@ -10,11 +10,11 @@ const intialState = {
     type: 'success',
     message: '',
   },
-  numberCart: 0,
   carts: {
     cartsItem: [],
     cartsDetail: {
-      totalPrice: 0
+      totalPrice: 0,
+      totalCartItem: 0
     },
   },
 
@@ -56,6 +56,7 @@ const productReducer = (state = intialState, action) => {
       productData.splice(0, 0, payload);
       // productData.unshift(payload);
       // const productData = [payload].concat(state.products);
+      console.log('[...state.products]====>>>', productData);
       return {
         ...state,
         products: productData,
@@ -73,7 +74,7 @@ const productReducer = (state = intialState, action) => {
     case "ADD_TO_CART": {
       const { cartsItem } = state.carts;
       const isItemExist = cartsItem.find((i) => i.id === payload.id);
-      let cartTotalPrice = 0;
+      // let cartTotalPrice = 0;
       if (!isItemExist) {
         cartsItem.push(payload);
       }
@@ -85,28 +86,25 @@ const productReducer = (state = intialState, action) => {
             i.quantity += 1;
           }
         }
-        cartTotalPrice += i.price*i.quantity;
+        // cartTotalPrice += i.price * i.quantity;
       });
-
+      const cartTotalPrice = cartsItem.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
       return {
         ...state,
         carts: {
           cartsItem: cartsItem,
           cartsDetail: {
-            totalPrice: Number(cartTotalPrice.toFixed(2)),
+            totalPrice: Number(cartTotalPrice),
+            totalCartItem: cartsItem.length,
           },
         },
-        numberCart: cartsItem.length,
       }
     }
 
     case "DELETE_TO_CART": {
       const proState = [...state.carts.cartsItem];
       const remainProducts = proState.filter((item) => item.id !== payload)
-
-      const remainTotalPrice = remainProducts.reduce((total, currentValue) => {
-        return total + currentValue.price * currentValue.quantity;
-      },0)
+      const remainTotalPrice = remainProducts.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
 
       return {
         ...state,
@@ -115,7 +113,7 @@ const productReducer = (state = intialState, action) => {
           cartsItem: remainProducts,
           cartsDetail: {
             ...state.carts.cartsDetail,
-            totalPrice: Number(remainTotalPrice.toFixed(2)),
+            totalPrice: Number(remainTotalPrice),
           }
         }
       }

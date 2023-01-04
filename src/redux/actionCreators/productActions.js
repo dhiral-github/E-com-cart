@@ -199,3 +199,14 @@ export const removeCartItem = (id) => (dispatch) => {
     console.log("err", err);
   }
 }
+// export const data = await fetch("http://localhost:3000/upload/post", {
+//       method: "post",
+//       headers: { "Content-Type": "multipart/form-data" },
+//       body: formData
+//     });
+//     const uploadedImage = await data.json();
+//     if (uploadedImage) {
+//       console.log("Successfully uploaded image");
+//     } else {
+//       console.log("Error Found");
+//     }

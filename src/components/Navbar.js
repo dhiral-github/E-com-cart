@@ -9,7 +9,7 @@ export default function Navbar(props) {
   const dispatch = useDispatch();
   let location = useLocation();
 
-  const cartNumer = useSelector((state) => state.allproducts.numberCart)
+  const {totalCartItem} = useSelector((state) => state.allproducts.carts.cartsDetail)
   
   useEffect(() => {
     return () => {
@@ -36,7 +36,7 @@ export default function Navbar(props) {
       className: "nav-link"
     },
     {
-      label: `Cart (${cartNumer})`,
+      label: `Cart (${totalCartItem})`,
       onClick: handleCarts,
       path: 'carts',
       className: "nav-link"
