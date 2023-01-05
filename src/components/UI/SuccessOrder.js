@@ -14,14 +14,14 @@ const SuccessOrder = () => {
 
   return (
     <div className='col-md-12'>
-      <span className='mb-3'><h5>Your Order has been successfully placed.Your item will be delivered within 5 to 7 working days.</h5> </span>
+      <span className='mb-3'><h5>🙂 Your Order has been successfully placed. Your item will be delivered within 5 to 7 working days.</h5> </span>
 
       {
         cartsItem.map((item, index) => {
           const { id, title, image, price, category, quantity, totalPriceItem } = item;
           return (
 
-            <div className='mb-3 my-3' key={index}>
+            <div className='mb-3 my-3 col-md-8' key={index}>
               <div style={{ display: 'flex' }}>
 
                 <Image style={{ width: '100px' }} src={image} />
@@ -32,14 +32,10 @@ const SuccessOrder = () => {
                   boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)'
                 }}>
                   <div >
-                    <span >
-                      {title}
-                    </span>
+                    <span><h5>{title}</h5></span>
                   </div>
-                  <div>
-                    ${price}
+                  <div><h5> ${price}</h5>
                   </div>
-
                   <div className='my-2'>Item: {quantity}</div>
                 </div>
               </div>
@@ -52,8 +48,8 @@ const SuccessOrder = () => {
         width: '20%',
         marginLeft: 'auto',
         position: 'absolute',
-        left: '64%',
-        top: '87px',
+        left: '66%',
+        top: '113px',
       }}>
         <div style={{ boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)' }}>
           <div>
@@ -85,7 +81,7 @@ const SuccessOrder = () => {
         </div>
       </div>
       <div style={{ width: '53%' }}>
-        <h5>Your products will delivered on the address mentioned below.</h5>
+        <h5>➡️ Your products will delivered on the address mentioned below.</h5>
         <hr />
         <div>
           <ul>
