@@ -1,9 +1,11 @@
 import React from 'react';
+import { Image } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 const SuccessOrder = () => {
   const { cartOrderSuccess, cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
   const { name, address, contactNumber, pinCode, CityDistrictTown, State, landmarkOptional, alternatePhone } = cartOrderSuccess;
+  console.log('getCart from add to cart==>>>', cartsItem);
 
   let totalQuantity = 0;
   cartsItem.forEach(item => {
@@ -12,25 +14,39 @@ const SuccessOrder = () => {
 
   return (
     <div className='col-md-12'>
-      <div style={{ width: '53%' }}>
-        <h5>Your products will delivered on the address mentioned below.</h5>
-        <hr />
-        <div>
-          <ul>
-            <li><h6>Name: {name} </h6></li>
-            <li><h6>Address: {address} </h6></li>
-            <li><h6>Contact Number: {contactNumber} </h6></li>
-            <li><h6>PinCode: {pinCode} </h6></li>
-            <li><h6>City: {CityDistrictTown} </h6></li>
-            <li><h6>State: {State} </h6></li>
-            <li><h6>Landmark: {landmarkOptional} </h6></li>
-            <li><h6>Alternative Phone: {alternatePhone} </h6></li>
-          </ul>
-        </div>
-        <hr />
-        <span>Your Order has been successfully placed.Your item will be delivered within 5 to 7 working days. </span>
-      </div>
+      <span className='mb-3'><h5>Your Order has been successfully placed.Your item will be delivered within 5 to 7 working days.</h5> </span>
 
+      {
+        cartsItem.map((item, index) => {
+          const { id, title, image, price, category, quantity, totalPriceItem } = item;
+          return (
+
+            <div className='mb-3 my-3' key={index}>
+              <div style={{ display: 'flex' }}>
+
+                <Image style={{ width: '100px' }} src={image} />
+
+                <div style={{
+                  width: '54%',
+                  marginLeft: '5%',
+                  boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)'
+                }}>
+                  <div >
+                    <span >
+                      {title}
+                    </span>
+                  </div>
+                  <div>
+                    ${price}
+                  </div>
+
+                  <div className='my-2'>Item: {quantity}</div>
+                </div>
+              </div>
+            </div>
+          )
+        })
+      }
       <div style={{
         verticalalign: 'top',
         width: '20%',
@@ -62,12 +78,29 @@ const SuccessOrder = () => {
                 fontWeight: '500',
                 fontSize: '18px'
               }}
-              >Total amount: ({cartsDetail.totalCartItem})
+              >Total amount: ({cartsDetail.totalPrice})
               </span>
             </div>
           </div>
         </div>
       </div>
+      <div style={{ width: '53%' }}>
+        <h5>Your products will delivered on the address mentioned below.</h5>
+        <hr />
+        <div>
+          <ul>
+            <li><h6>Name: {name} </h6></li>
+            <li><h6>Address: {address} </h6></li>
+            <li><h6>Contact Number: {contactNumber} </h6></li>
+            <li><h6>PinCode: {pinCode} </h6></li>
+            <li><h6>City: {CityDistrictTown} </h6></li>
+            <li><h6>State: {State} </h6></li>
+            <li><h6>Landmark: {landmarkOptional} </h6></li>
+            <li><h6>Alternative Phone: {alternatePhone} </h6></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   )
 }
