@@ -16,7 +16,7 @@ const intialState = {
       totalPrice: 0,
       totalCartItem: 0
     },
-    cartOrderSuccess:[],
+    cartOrderSuccess: [],
   },
 
 };
@@ -152,13 +152,13 @@ const productReducer = (state = intialState, action) => {
         products: deleteId
       }
     }
-    case "ORDER_SUCCESSFULL":{
-      console.log('ORDER_SUCCESSFULL==>>',payload);
-      return{
+    case "ORDER_SUCCESSFULL": {
+      console.log('ORDER_SUCCESSFULL==>>', payload);
+      return {
         ...state,
-        carts:{
+        carts: {
           ...state.carts,
-          cartOrderSuccess:payload
+          cartOrderSuccess: payload
         }
       }
     }

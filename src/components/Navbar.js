@@ -28,7 +28,7 @@ export default function Navbar(props) {
       label: "Home",
       path: "home",
       className: "nav-link",
-      onClick: handleCarts,
+      // onClick: handleCarts,
     },
     {
       label: "Add product",
@@ -37,7 +37,7 @@ export default function Navbar(props) {
     },
     {
       label: `Cart (${totalCartItem})`,
-      onClick: handleCarts,
+      // onClick: handleCarts,
       path: 'carts',
       className: "nav-link"
     },
@@ -63,7 +63,7 @@ export default function Navbar(props) {
                 location={location.pathname}
                 linkStyle={{ backgroundColor: 'white' }}
                 className={lItem.className}
-                handleClick={lItem.onClick}
+                handleClick={lItem?.onClick}
                 style={lItem.style}
               />
 

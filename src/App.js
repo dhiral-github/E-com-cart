@@ -9,21 +9,17 @@ import SuccessOrder from "./components/UI/SuccessOrder";
 
 function App() {
 
-  const myStyle = {
-    display: 'flex',
-    flexFlow: 'wrap',
-  }
   return (
     <>
       <Router>
         <Navbar title="e-com-cart" />
-        <div className="container p-2 bd-highlight" style={myStyle}>
+        <div className="container p-2 bd-highlight" style={{ display: 'flex', flexFlow: 'wrap', }}>
           <Routes>
             <Route exact path="/home" element={<ProductListing />} />
             <Route exact path="/product/:productId" element={<ProductDetail />} />
             <Route exact path="/:carts" element={<AddToCart />} />
-            <Route exact path="/cart/placeOrder" element={<CartPlaceOrder/>}/>
-            <Route exact path="/successOrder" element={<SuccessOrder/>}/>
+            <Route exact path="/cart/placeOrder" element={<CartPlaceOrder />} />
+            <Route exact path="/successOrder" element={<SuccessOrder />} />
           </Routes>
         </div>
       </Router>

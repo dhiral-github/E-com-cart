@@ -216,4 +216,9 @@ export const suucessOrderData = (data) => (dispatch) => {
     type: "ORDER_SUCCESSFULL",
     payload: data
   });
+  dispatch(toastProduct({
+    showToast: true,
+    type: 'success',
+    message: 'Your order has been successfully placed'
+  }))
 };

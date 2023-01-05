@@ -1,9 +1,11 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import DismissibleToasts from './DismissibleToasts';
 
 const SuccessOrder = () => {
   const { cartOrderSuccess, cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
+  const { toastDetails } = useSelector((state) => state.allproducts);
   const { name, address, contactNumber, pinCode, CityDistrictTown, State, landmarkOptional, alternatePhone } = cartOrderSuccess;
   console.log('getCart from add to cart==>>>', cartsItem);
 
@@ -14,6 +16,10 @@ const SuccessOrder = () => {
 
   return (
     <div className='col-md-12'>
+      {
+        toastDetails.showToast &&
+        <DismissibleToasts />
+      }
       <span className='mb-3'><h5>🙂 Your Order has been successfully placed. Your item will be delivered within 5 to 7 working days.</h5> </span>
 
       {
@@ -27,7 +33,7 @@ const SuccessOrder = () => {
                 <Image style={{ width: '100px' }} src={image} />
 
                 <div style={{
-                  width: '54%',
+                  width: '100%',
                   marginLeft: '5%',
                   boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)'
                 }}>

@@ -14,13 +14,13 @@ const ProductDetail = () => {
   const { selectedBuyNowProduct, productLoading, toastDetails } = useSelector((state) => state.allproducts);
   const { title, image, price, category, description } = selectedBuyNowProduct;
 
+  useEffect(() => {
+    dispatch(selectedproduct(productId));
+  }, [productId, dispatch])
+
   const addToCartItem = (products) => {
     dispatch(addToCart(products))
   }
-
-  useEffect(() => {
-    dispatch(selectedproduct(productId));
-  }, [dispatch, productId])
 
   return (
     <div className="ui grid container">
