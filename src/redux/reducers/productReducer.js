@@ -121,6 +121,7 @@ const productReducer = (state = intialState, action) => {
           cartsDetail: {
             ...state.carts.cartsDetail,
             totalPrice: Number(remainTotalPrice),
+            totalCartItem: remainProducts.length,
           }
         }
       }
