@@ -16,6 +16,7 @@ const intialState = {
       totalPrice: 0,
       totalCartItem: 0
     },
+    cartOrderSuccess:[],
   },
 
 };
@@ -37,9 +38,16 @@ const productReducer = (state = intialState, action) => {
       };
     }
     case "SELECTED_PRODUCTS": {
+      console.log('[...state.payload]====>>>', payload);
+      const objBuyNow = [...state.products];
+      const dataObj = objBuyNow.find((item) => {
+        return Number(item.id) === Number(payload)
+      });
+      console.log('dataObj=====>>', dataObj);
+
       return {
         ...state,
-        selectedBuyNowProduct: payload,
+        selectedBuyNowProduct: dataObj,
         // products: {},
         productLoading: false,
       };
@@ -142,6 +150,16 @@ const productReducer = (state = intialState, action) => {
       return {
         ...state,
         products: deleteId
+      }
+    }
+    case "ORDER_SUCCESSFULL":{
+      console.log('ORDER_SUCCESSFULL==>>',payload);
+      return{
+        ...state,
+        carts:{
+          ...state.carts,
+          cartOrderSuccess:payload
+        }
       }
     }
 

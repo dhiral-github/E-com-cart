@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeCartItem } from '../../redux/actionCreators/productActions'
@@ -15,9 +15,9 @@ const AddToCart = () => {
   const { cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
   console.log('getCart from add to cart==>>>', cartsItem);
 
-cartsItem.forEach(item => {
+  cartsItem.forEach(item => {
     totalQuantity += item.quantity
-});
+  });
 
   return (
     <div className='container'>
@@ -36,7 +36,7 @@ cartsItem.forEach(item => {
 
                 <Image style={{ width: '100px' }} src={image} />
 
-                <div style={{ width: '54%', marginLeft: '5%', boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)'}}>
+                <div style={{ width: '54%', marginLeft: '5%', boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)' }}>
                   <div >
                     <span >
                       {title}
@@ -96,6 +96,9 @@ cartsItem.forEach(item => {
             </div>
           </div>
         </div>
+        <Link to={`/cart/placeOrder`}>
+          <Button className='my-2' style={{ backgroundColor: '#fb641b', border: 'none' }} >Place Order</Button>
+        </Link>
       </div>
     </div>
 

@@ -20,7 +20,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     dispatch(selectedproduct(productId));
-  }, [productId, dispatch])
+  }, [dispatch, productId])
 
   return (
     <div className="ui grid container">

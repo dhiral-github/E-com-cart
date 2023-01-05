@@ -23,13 +23,23 @@ export const setproducts = () => async (dispatch) => {
 export const selectedproduct = (id) => async (dispatch) => {
   dispatch(setproductLoading());
   try {
-    const newsSource = await axios.get(`https://fakestoreapi.com/products/${id}`);
-    if (newsSource) {
-      dispatch({
-        type: "SELECTED_PRODUCTS",
-        payload: newsSource.data,
-      });
-    }
+    // const newsSource = await axios.get(`https://fakestoreapi.com/products/${id}`);
+    // console.log('newsSource===>>>',newsSource.data)
+    // if (newsSource) {
+    //   dispatch({
+    //     type: "SELECTED_PRODUCTS",
+    //     payload: {...newsSource.data, id},
+    //   });
+    // }
+    axios.get(`https://fakestoreapi.com/products/${id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "SELECTED_PRODUCTS",
+            payload: id,
+          });
+        }
+      })
   } catch (err) {
     console.log("err", err);
   }
@@ -199,3 +209,11 @@ export const removeCartItem = (id) => (dispatch) => {
     console.log("err", err);
   }
 }
+
+export const suucessOrderData = (data) => (dispatch) => {
+
+  dispatch({
+    type: "ORDER_SUCCESSFULL",
+    payload: data
+  });
+};
