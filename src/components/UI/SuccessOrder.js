@@ -7,7 +7,6 @@ const SuccessOrder = () => {
   const { cartOrderSuccess, cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
   const { toastDetails } = useSelector((state) => state.allproducts);
   const { name, address, contactNumber, pinCode, CityDistrictTown, State, landmarkOptional, alternatePhone } = cartOrderSuccess;
-  console.log('getCart from add to cart==>>>', cartsItem);
 
   let totalQuantity = 0;
   cartsItem.forEach(item => {
@@ -24,12 +23,14 @@ const SuccessOrder = () => {
 
       {
         cartsItem.map((item, index) => {
-          const { id, title, image, price, category, quantity, totalPriceItem } = item;
+          const { id, title, image, price, quantity } = item;
           return (
 
             <div className='mb-3 my-3 col-md-8' key={index}>
               <div style={{ display: 'flex' }}>
-
+                <div style={{ marginRight: '10px' }}>
+                  <h5>{id}</h5>
+                </div>
                 <Image style={{ width: '100px' }} src={image} />
 
                 <div style={{

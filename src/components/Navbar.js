@@ -20,15 +20,12 @@ export default function Navbar(props) {
     dispatch(showproductModal(true),
     )
   }
-  const handleCarts = () => {
-  }
 
   const listItemArray = [
     {
       label: "Home",
       path: "home",
       className: "nav-link",
-      // onClick: handleCarts,
     },
     {
       label: "Add product",
@@ -37,7 +34,6 @@ export default function Navbar(props) {
     },
     {
       label: `Cart (${totalCartItem})`,
-      // onClick: handleCarts,
       path: 'carts',
       className: "nav-link"
     },
