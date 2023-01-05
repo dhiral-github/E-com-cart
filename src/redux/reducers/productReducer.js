@@ -18,7 +18,6 @@ const intialState = {
     },
     cartOrderSuccess: [],
   },
-
 };
 
 const productReducer = (state = intialState, action) => {
@@ -143,9 +142,7 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "DELETE_PRODUCT": {
-
       const proState = [...state.products];
-
       const deleteId = proState.filter((item) => item.id !== payload)
       return {
         ...state,
@@ -153,7 +150,6 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "ORDER_SUCCESSFULL": {
-      console.log('ORDER_SUCCESSFULL==>>', payload);
       return {
         ...state,
         carts: {
