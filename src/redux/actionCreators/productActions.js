@@ -219,6 +219,12 @@ export const suucessOrderData = (data) => (dispatch) => {
   dispatch(toastProduct({
     showToast: true,
     type: 'success',
-    message: 'Your order has been successfully placed'
+    message: 'Your order has been successfully placed!'
   }))
 };
+export const setSearchData = (searchText) => (dispatch) => {
+  dispatch({
+    type: "SEARCH_PRODUCTS",
+    payload: searchText
+  })
+}

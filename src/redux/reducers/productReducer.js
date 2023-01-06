@@ -18,6 +18,7 @@ const intialState = {
     },
     cartOrderSuccess: [],
   },
+  searchItem: '',
 };
 
 const productReducer = (state = intialState, action) => {
@@ -157,6 +158,18 @@ const productReducer = (state = intialState, action) => {
           ...state.carts,
           cartOrderSuccess: payload
         }
+      }
+    }
+    case "SEARCH_PRODUCTS": {
+      console.log('SEARCH_PRODUCTS state ==>>>', [...state.products]);
+      console.log('SEARCH_PRODUCTS payload ==>>>', payload);
+      const filterProducts = [...state.products];
+      const filSearch = filterProducts.filter((searchData) => searchData.title.toLowerCase().includes(payload.toLowerCase()));
+      // debugger
+      console.log('filSearch===>>>', filSearch);
+      return {
+        ...state,
+        searchItem: filSearch
       }
     }
 

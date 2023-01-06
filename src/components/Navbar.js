@@ -3,12 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import AddProductModal from "./AddProductModal";
 import ListItem from "./ListItem";
 import { useDispatch, useSelector } from 'react-redux';
-import { showproductModal } from '../redux/actionCreators/productActions';
+import { setSearchData, showproductModal } from '../redux/actionCreators/productActions';
 
 export default function Navbar(props) {
   const dispatch = useDispatch();
   let location = useLocation();
-
   const { totalCartItem } = useSelector((state) => state.allproducts.carts.cartsDetail)
 
   useEffect(() => {
@@ -19,6 +18,9 @@ export default function Navbar(props) {
   const handleClick = () => {
     dispatch(showproductModal(true),
     )
+  }
+  const handleSearch = (e) => {
+    dispatch(setSearchData(e.target.value));
   }
 
   const listItemArray = [
@@ -65,8 +67,9 @@ export default function Navbar(props) {
 
             ))}
             <AddProductModal />
-
+            <input placeholder="Search Product Title" type='search' name='search' onChange={handleSearch} />
           </ul>
+
         </div>
       </div>
     </nav>

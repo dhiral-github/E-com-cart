@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeCartItem } from '../../redux/actionCreators/productActions'
 import DismissibleToasts from './DismissibleToasts';
+import RemoveModal from './RemoveModal';
+
 const AddToCart = () => {
   const dispatch = useDispatch();
   let totalQuantity = 0;
+  const [removePopUp, setRemovePopUp] = useState(false);
+  const [removeItem, setRemoveItem] = useState({});
+
   const deleteCartItem = (id) => {
-    dispatch(removeCartItem(id))
+    dispatch(removeCartItem(id));
+    setRemovePopUp(false);
+  }
+
+  const showRemoveItemModal = (show, item = {}) => {
+    setRemoveItem(item);
+    setRemovePopUp(show);
   }
 
   const { toastDetails } = useSelector((state) => state.allproducts);
@@ -25,8 +36,7 @@ const AddToCart = () => {
         toastDetails.showToast &&
         <DismissibleToasts />
       }
-
-      {
+      { 
         cartsItem.length === 0 ?
           (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -44,7 +54,6 @@ const AddToCart = () => {
                     <h5>{id}</h5>
                   </div>
                   <Image style={{ width: '100px' }} src={image} />
-
                   <div style={{ width: '54%', marginLeft: '5%', boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)' }}>
                     <div >
                       <span >
@@ -60,7 +69,7 @@ const AddToCart = () => {
                       </span>
                     </div>
                     <div>
-                      <Link style={{ textDecoration: 'none', color: 'rgb(199 38 38' }} onClick={() => deleteCartItem(id)} >REMOVE</Link>
+                      <Link style={{ textDecoration: 'none', color: 'rgb(199 38 38' }} onClick={() => showRemoveItemModal(true, item)} >REMOVE</Link>
                     </div>
                     <div className='my-2'>Item: {quantity}</div>
                   </div>
@@ -69,8 +78,14 @@ const AddToCart = () => {
             )
           })
       }
+      <RemoveModal
+        show={removePopUp}
+        onHide={() => showRemoveItemModal(false)}
+        deleteCartItem={deleteCartItem}
+        removeItem={removeItem}
+      />
       {
-        cartsItem.length === 0  ? '' :
+        cartsItem.length === 0 ? '' :
           <div style={{
             verticalalign: 'top',
             width: '20%',
@@ -107,13 +122,11 @@ const AddToCart = () => {
                 </div>
               </div>
             </div>
-
             <Link to={`/cart/placeOrder`}>
               <Button className='my-2' style={{ backgroundColor: '#fb641b', border: 'none' }} >Place Order</Button>
             </Link>
-
           </div>
-      }
+        }
     </div>
 
 

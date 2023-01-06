@@ -23,13 +23,13 @@ const SuccessOrder = () => {
 
       {
         cartsItem.map((item, index) => {
-          const { id, title, image, price, quantity } = item;
+          const { title, image, price, quantity } = item;
           return (
 
             <div className='mb-3 my-3 col-md-8' key={index}>
               <div style={{ display: 'flex' }}>
                 <div style={{ marginRight: '10px' }}>
-                  <h5>{id}</h5>
+                  
                 </div>
                 <Image style={{ width: '100px' }} src={image} />
 

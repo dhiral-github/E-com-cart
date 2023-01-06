@@ -8,7 +8,8 @@ import SpinnerLoading from "../UI/SpinnerLoading";
 
 const ProductComponent = () => {
   const dispatch = useDispatch();
-  const { products, productLoading } = useSelector((state) => state.allproducts);
+  const { products, searchItem, productLoading } = useSelector((state) => state.allproducts);
+  console.log('searchItem=====> components', searchItem);
 
   const handleEdit = (id) => {
     const selectedObj = products.find((prodObj) => (prodObj.id === id));
@@ -21,11 +22,13 @@ const ProductComponent = () => {
   return (
     <>
       {
-        productLoading ? (
-          <div>
-            <SpinnerLoading text='Loading products...' />
-          </div>
-        ) : (
+        productLoading ?
+          (
+            <div>
+              <SpinnerLoading text='Loading products...' />
+            </div>
+          ) :
+          // searchItem.length > 0 ? :''
           products?.map((product, index) => {
             const { id, title, image, price } = product;
             return (
@@ -47,7 +50,7 @@ const ProductComponent = () => {
               </div>
             )
           })
-        )
+
       }
       {
         products.length === 0 && !productLoading && <NoDataAvailable text='Something went wrong...' />
