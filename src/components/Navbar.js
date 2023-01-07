@@ -67,7 +67,7 @@ export default function Navbar(props) {
 
             ))}
             <AddProductModal />
-            <input placeholder="Search Product Title" type='search' name='search' onChange={handleSearch} />
+            <input placeholder="Search Product Title"  name='search' onChange={handleSearch} />
           </ul>
 
         </div>

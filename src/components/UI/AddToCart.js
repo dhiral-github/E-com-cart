@@ -45,13 +45,12 @@ const AddToCart = () => {
           )
           :
           cartsItem.map((item, index) => {
-            const { id, title, image, price, category, quantity } = item;
+            const {title, image, price, category, quantity } = item;
             return (
 
               <div className='mb-3' key={index}>
                 <div style={{ display: 'flex' }}>
                   <div style={{ marginRight: '10px' }}>
-                    <h5>{id}</h5>
                   </div>
                   <Image style={{ width: '100px' }} src={image} />
                   <div style={{ width: '54%', marginLeft: '5%', boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)' }}>

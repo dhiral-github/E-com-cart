@@ -76,7 +76,7 @@ const AddProductModal = () => {
             </Form.Group>
             <Form.Group className="mb-4" controlId="formBasicTitle">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="text" placeholder="Enter Description" name='descrption' value={formData.description} onChange={handleChange} />
+              <Form.Control type="text" placeholder="Enter Description" name='description' value={formData.description} onChange={handleChange} />
 
             </Form.Group>
             <Form.Group className="mb-4" controlId="formBasicTitle">
