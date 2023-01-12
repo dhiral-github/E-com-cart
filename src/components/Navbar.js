@@ -67,8 +67,10 @@ export default function Navbar(props) {
 
             ))}
             <AddProductModal />
-            <div style={{marginTop:'15px'}}>
-            <input placeholder="Search Product"  name='search' onChange={handleSearch} />
+            <div style={{ marginTop: '15px' }}>
+              <div>
+                <input placeholder="Search for products, category and more" style={{ width: '310px' }} name='search' onChange={handleSearch} />
+              </div>
             </div>
           </ul>
 

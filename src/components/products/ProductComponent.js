@@ -36,7 +36,9 @@ const ProductComponent = () => {
   }
   const handleRatingStar = (e) => {
     if (e.target.checked) {
-      dispatch(ratingStarProducts(e.target.value))
+      dispatch(ratingStarProducts(e.target.value));
+    } else {
+      dispatch(ratingStarProducts(""))
     }
   }
 
@@ -48,13 +50,13 @@ const ProductComponent = () => {
       item.category.toLowerCase().match(searchText.toLowerCase()))
     && (item.price >= rangePrice[0] && item.price <= rangePrice[1])
     && (categoryFilter ? item.category === categoryFilter : true)
-    && (item.rating.rate >= ratingStar)
+    && (ratingStar ? item.rating.rate >= ratingStar : true)
   )
-  console.log('categoryFilter==>>>', searchProducts);
+  console.log('filterProducts==>>>', searchProducts);
 
   useEffect(() => {
     setFilterData(searchProducts);
-  }, [products, searchText, rangePrice, categoryFilter])
+  }, [products, searchText, rangePrice, categoryFilter, ratingStar])
 
   return (
     <>
@@ -67,6 +69,7 @@ const ProductComponent = () => {
               minChange={handleMinPrice}
               maxChange={handleMaxPrice}
               onRatingStar={handleRatingStar}
+              filterProductsLength = {searchProducts.length}
             />
           </div>
         }

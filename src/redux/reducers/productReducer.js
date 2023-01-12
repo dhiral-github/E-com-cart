@@ -220,6 +220,7 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "RATING_STAR": {
+      // debugger
       return {
         ...state,
         filterData:{

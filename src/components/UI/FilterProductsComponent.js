@@ -8,7 +8,7 @@ const FilterProductsComponent = (props) => {
   const dispatch = useDispatch();
   const { rangePrice, categoryFilter, ratingStar } = useSelector((state) => state.allproducts.filterData);
   const { products } = useSelector((state) => state.allproducts);
-  const { onChangeRange, onhandleCheck, minChange, maxChange, onRatingStar } = props;
+  const { onChangeRange, onhandleCheck, minChange, maxChange, onRatingStar, filterProductsLength } = props;
 
   const clearFilter = () => {
     dispatch(clearFilterProducts());
@@ -20,23 +20,26 @@ const FilterProductsComponent = (props) => {
   return (
     <>
       <section>
-        <div>
+        <div style={{textAlign:'center'}} >
           <div style={{
             fontSize: '15px',
             fontWeight: 600,
             textTransform: 'uppercase',
             letterSpacing: ' .3px',
-            display: 'inline-block'
-          }}>filter</div>
+            display: 'inline-block',
+            border:'1px black solid',
+            backgroundColor:'aliceblue'
+          }}>filter ({`${filterProductsLength} Item`})</div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className='mt-3' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <div style={{
-              fontSize: '15px',
+              fontSize: '14px',
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: ' .3px',
-              display: 'inline-block'
+              display: 'inline-block',
+              backgroundColor:'aliceblue'
             }}>Price Range</div>
           </div>
           <div>
@@ -76,20 +79,21 @@ const FilterProductsComponent = (props) => {
         <div
           className='mb-2'
           style={{
-            fontSize: '15px',
+            fontSize: '14px',
             fontWeight: 600,
             textTransform: 'uppercase',
             letterSpacing: ' .3px',
-            display: 'inline-block'
+            display: 'inline-block',
+            backgroundColor:'aliceblue'
           }}>Category</div>
         <div>
-          <FormSelect
-            aria-label="Select category"
+          <Form.Control
+            as="select"
             onChange={(event) => onhandleCheck(event.target.value)}
             value={categoryFilter}
             name='category'
           >
-            <option selected>Select category</option>
+            <option>Select category</option>
             {cateObj.map((i, key) => {
               return (
                 <option value={i} key={key}>
@@ -97,7 +101,7 @@ const FilterProductsComponent = (props) => {
                 </option>
               );
             })}
-          </FormSelect>
+          </Form.Control>
 
         </div>
       </section>
@@ -105,19 +109,26 @@ const FilterProductsComponent = (props) => {
       <section>
         <div>
           <div style={{
-            fontSize: '15px',
+            fontSize: '14px',
             fontWeight: 600,
             textTransform: 'uppercase',
-            letterSpacing: ' .3px',
-            display: 'inline-block'
+            letterSpacing: '.3px',
+            display: 'inline-block',
+            backgroundColor:'aliceblue'
           }}>Customer Ratings</div>
 
-          <div >
-            <Form.Check label='4 * & above' value={4}  onChange={onRatingStar}/>           
-              
+          <div className='RatingProduct'>
+            <div >
+              <Form.Check label='4 * & above' value={4} onChange={onRatingStar} />
+            </div>
+            <div >
+              <Form.Check label='3 * & above' value={3} onChange={onRatingStar} />
+            </div>
+
           </div>
         </div>
       </section>
+      <hr />
     </>
   );
 }
