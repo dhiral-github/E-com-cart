@@ -18,8 +18,15 @@ const intialState = {
     },
     cartOrderSuccess: [],
   },
-  // searchItem: [],
-  searchText:''
+  searchText: '',
+  filterData: {
+    rangePrice: [0, 1000],
+    categoryFilter: '',
+    min: '',
+    max: '',
+    ratingStar:0
+  },
+
 };
 
 const productReducer = (state = intialState, action) => {
@@ -164,7 +171,61 @@ const productReducer = (state = intialState, action) => {
     case "SEARCH_PRODUCTS": {
       return {
         ...state,
-        searchText: payload,
+        searchText: payload
+      }
+    }
+    case "FILTER_PRODUCTS": {
+      return {
+        ...state,
+        filterData: {
+          rangePrice: payload,
+        }
+      }
+    }
+    case "CLEAR_FILTER_PRODUCTS": {
+      return {
+        ...state,
+        filterData: {
+          rangePrice: [0, 1000],
+        }
+      }
+    }
+    case "CATEGORY_FILTER_PRODUCTS": {
+      return {
+        ...state,
+        filterData: {
+          ...state.filterData,
+          categoryFilter: payload,
+        }
+      }
+    }
+    case "SET_MIN_PRICE": {
+      return {
+        ...state,
+        filterData: {
+          ...state.filterData,
+          rangePrice: [payload, state.filterData.rangePrice[1]],
+          min: payload,
+        }
+      }
+    }
+    case "SET_MAX_PRICE": {
+      return {
+        ...state,
+        filterData: {
+          ...state.filterData,
+          rangePrice: [state.filterData.rangePrice[0], payload],
+          max: payload,
+        }
+      }
+    }
+    case "RATING_STAR": {
+      return {
+        ...state,
+        filterData:{
+          ...state.filterData,
+          ratingStar : payload
+        }
       }
     }
 

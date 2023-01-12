@@ -43,9 +43,7 @@ const ProductDetail = () => {
               </div>
               <div style={{ width: '65%' }}>
                 <h1>{title}</h1>
-                <h2>
-                  <href className="ui teal tag label">${price}</href>
-                </h2>
+                <h2 className="ui teal tag label">${price}</h2>
                 <h3 className="ui brown block header">{category}</h3>
                 <p>{description}</p>
                 <div className="ui vertical animated button" tabIndex="0">

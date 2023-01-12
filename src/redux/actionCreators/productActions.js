@@ -90,7 +90,6 @@ export const selectedProduct = (selectedproduct) => (dispatch) => {
 };
 
 export const updateProduct = (product) => (dispatch) => {
-
   const { id } = product
   try {
     axios.put(`https://fakestoreapi.com/products/${id}`)
@@ -154,7 +153,6 @@ export const deleteProduct = (productId) => (dispatch) => {
   }
 }
 export const addToCart = (cardData) => (dispatch) => {
-  console.log("ADD_TO_CART==>>>Action", cardData);
   try {
     axios.post(`https://fakestoreapi.com/carts`)
       .then((response) => {
@@ -182,7 +180,6 @@ export const addToCart = (cardData) => (dispatch) => {
   }
 }
 export const removeCartItem = (id) => (dispatch) => {
-  console.log("REMOVE_TO_CART==>>>Action", id);
   try {
     axios.delete(`https://fakestoreapi.com/carts/${id}`)
       .then((response) => {
@@ -226,5 +223,41 @@ export const setSearchData = (searchText) => (dispatch) => {
   dispatch({
     type: "SEARCH_PRODUCTS",
     payload: searchText
+  })
+}
+export const setFilterProducts = (filter) => (dispatch) => {
+  dispatch({
+    type: "FILTER_PRODUCTS",
+    payload: filter
+  })
+}
+export const clearFilterProducts = (clearProduct) => (dispatch) => {
+  dispatch({
+    type: "CLEAR_FILTER_PRODUCTS",
+    payload: clearProduct
+  })
+}
+export const categoryFilterProducts = (category) => (dispatch) => {
+  dispatch({
+    type: "CATEGORY_FILTER_PRODUCTS",
+    payload: category
+  })
+}
+export const setMinPrice = (minPrice) => (dispatch) => {
+  dispatch({
+    type: "SET_MIN_PRICE",
+    payload: minPrice
+  })
+}
+export const setMaxPrice = (maxPrice) => (dispatch) => {
+  dispatch({
+    type: "SET_MAX_PRICE",
+    payload: maxPrice
+  })
+}
+export const ratingStarProducts = (rating) => (dispatch) => {
+  dispatch({
+    type: "RATING_STAR",
+    payload: rating
   })
 }
