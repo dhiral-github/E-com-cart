@@ -1,12 +1,13 @@
 import { Slider } from '@mui/material';
 import React from 'react';
-import { Form, FormSelect } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearFilterProducts } from '../../redux/actionCreators/productActions';
+import './filterProductsComponent.css'
 
 const FilterProductsComponent = (props) => {
   const dispatch = useDispatch();
-  const { rangePrice, categoryFilter, ratingStar } = useSelector((state) => state.allproducts.filterData);
+  const { rangePrice, categoryFilter } = useSelector((state) => state.allproducts.filterData);
   const { products } = useSelector((state) => state.allproducts);
   const { onChangeRange, onhandleCheck, minChange, maxChange, onRatingStar, filterProductsLength } = props;
 
@@ -20,40 +21,15 @@ const FilterProductsComponent = (props) => {
   return (
     <>
       <section>
-        <div style={{textAlign:'center'}} >
-          <div style={{
-            fontSize: '15px',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: ' .3px',
-            display: 'inline-block',
-            border:'1px black solid',
-            backgroundColor:'aliceblue'
-          }}>filter ({`${filterProductsLength} Item`})</div>
+        <div className="filter-contain">
+          <div className="filter-body">filter ({`${filterProductsLength} Item`})</div>
         </div>
-        <div className='mt-3' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className='filter-priceRange mt-3'>
           <div>
-            <div style={{
-              fontSize: '14px',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: ' .3px',
-              display: 'inline-block',
-              backgroundColor:'aliceblue'
-            }}>Price Range</div>
+            <div className="filter-price">Price Range</div>
           </div>
-          <div>
-            <button style={{
-              cursor: 'pointer',
-              color: '#2874f0',
-              fontSize: '12px',
-              textTransform: 'uppercase',
-              fontWeight: '500',
-              border: 'none',
-              background: 'white'
-            }}
-              onClick={clearFilter}
-            >Clear</button>
+          <div >
+            <button className="filter-clear" onClick={clearFilter}>Clear</button>
           </div>
         </div>
         <div>
@@ -84,7 +60,7 @@ const FilterProductsComponent = (props) => {
             textTransform: 'uppercase',
             letterSpacing: ' .3px',
             display: 'inline-block',
-            backgroundColor:'aliceblue'
+            backgroundColor: 'aliceblue'
           }}>Category</div>
         <div>
           <Form.Control
@@ -114,7 +90,7 @@ const FilterProductsComponent = (props) => {
             textTransform: 'uppercase',
             letterSpacing: '.3px',
             display: 'inline-block',
-            backgroundColor:'aliceblue'
+            backgroundColor: 'aliceblue'
           }}>Customer Ratings</div>
 
           <div className='RatingProduct'>
@@ -132,6 +108,5 @@ const FilterProductsComponent = (props) => {
     </>
   );
 }
-
 
 export default FilterProductsComponent;

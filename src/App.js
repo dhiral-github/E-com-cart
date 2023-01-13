@@ -6,7 +6,7 @@ import ProductDetail from "./components/products/ProductDetail";
 import AddToCart from "./components/UI/AddToCart";
 import CartPlaceOrder from "./components/UI/CartPlaceOrder";
 import SuccessOrder from "./components/UI/SuccessOrder";
-
+// https://fakestoreapi.com/
 function App() {
 
   return (
@@ -14,18 +14,17 @@ function App() {
       <Router>
         <Navbar title="e-com-cart" />
         {/* <div className="container p-2 bd-highlight" style={{ display: 'flex', flexFlow: 'wrap', }}> */}
-        <div className="">
+        <div className="home">
           <div className="auto" >
-            <div className="comp" style={{display:'flex',flexFlow:'row',}}>
-          <Routes>
-            <Route exact path="/home" element={<ProductListing />} />
-            <Route exact path="/product/:productId" element={<ProductDetail />} />
-            <Route exact path="/:carts" element={<AddToCart />} />
-            <Route exact path="/cart/placeOrder" element={<CartPlaceOrder />} />
-            <Route exact path="/successOrder" element={<SuccessOrder />} />
-          </Routes>
-          </div>
-          
+            <div className="comp" style={{ display: 'flex', flexFlow: 'row', }}>
+              <Routes>
+                <Route exact path="/home" element={<ProductListing />} />
+                <Route exact path="/product/:productId" element={<ProductDetail />} />
+                <Route exact path="/:carts" element={<AddToCart />} />
+                <Route exact path="/cart/placeOrder" element={<CartPlaceOrder />} />
+                <Route exact path="/successOrder" element={<SuccessOrder />} />
+              </Routes>
+            </div>
           </div>
         </div>
       </Router>

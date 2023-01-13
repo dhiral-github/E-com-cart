@@ -6,7 +6,7 @@ import { selectedproduct, addToCart } from "../../redux/actionCreators/productAc
 import DismissibleToasts from "../UI/DismissibleToasts";
 import NoDataAvailable from "../UI/NoDataAvailable";
 import SpinnerLoading from "../UI/SpinnerLoading";
-
+import './productDetail.css'
 const ProductDetail = () => {
 
   const dispatch = useDispatch();
@@ -37,26 +37,22 @@ const ProductDetail = () => {
 
           Object.keys(selectedBuyNowProduct).length === 0 && !productLoading ?
             <NoDataAvailable text='Something went wrong...' /> :
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="proDetail">
               <div>
-                <Image className="ui fluid image" style={{ width: '260px' }} src={image} />
+                <Image className="proDetail-image" src={image} />
               </div>
-              <div style={{ width: '65%' }}>
-                <h1>{title}</h1>
-                <h2 className="ui teal tag label">${price}</h2>
-                <h3 className="ui brown block header">{category}</h3>
-                <p>{description}</p>
-                <div className="ui vertical animated button" tabIndex="0">
-                  <div className="hidden content">
-                    <i className="shop icon"></i>
-                  </div>
+              <div className="proDetail-contain">
+                <div className="proDetail-Title">{title}</div>
+                <div className="proDetail-Price">${price}</div>
+                <div className="proDetail-Category mb-3">{category}</div>
+                <h6>{description}</h6>
+                <div className="mt-3" tabIndex="0">
                   <Button variant="success" onClick={() => addToCartItem(selectedBuyNowProduct)} >Add to Cart</Button>
                 </div>
               </div>
             </div>
         )
       }
-
     </div>
   );
 };

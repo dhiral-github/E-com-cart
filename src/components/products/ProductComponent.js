@@ -6,6 +6,7 @@ import { showproductModal, deleteProduct, selectedProduct, setFilterProducts, ca
 import FilterProductsComponent from "../UI/FilterProductsComponent";
 import NoDataAvailable from "../UI/NoDataAvailable";
 import SpinnerLoading from "../UI/SpinnerLoading";
+import './productComponent.css'
 
 const ProductComponent = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const ProductComponent = () => {
 
   return (
     <>
-      <div className="asd mx-3" style={{ flex: '0 0 280px', flexFlow: 'row', maxWidth: '280px', padding: '0px 10px 0px 0px' }}>
+      <div className="filterHome mx-3">
         {
           <div>
             <FilterProductsComponent
@@ -69,21 +70,16 @@ const ProductComponent = () => {
               minChange={handleMinPrice}
               maxChange={handleMaxPrice}
               onRatingStar={handleRatingStar}
-              filterProductsLength = {searchProducts.length}
+              filterProductsLength={searchProducts.length}
             />
           </div>
         }
       </div>
-      <div className="abcd" style={{
-
-        display: 'flex',
-        flexWrap: 'wrap'
-      }}>
-
+      <div className="productHome">
         {
           productLoading ?
             (
-              <div>
+              <div style={{ marginLeft: '660px' }}>
                 <SpinnerLoading text='Loading products...' />
               </div>
             ) :
@@ -93,11 +89,11 @@ const ProductComponent = () => {
               return (
                 <div className="col-md-3 mb-4" key={index}>
                   <div className="card h-100 text-center p-4" >
-                    <img src={image} className="card-img-top" style={{ padding: '15px 39px 18px 53px' }} alt="" height='250px' />
+                    <img src={image} className="card-img-top cardImage"  alt="" height='250px' />
                     <div className="card-body">
                       <h5 className="card-title mb-0">{title?.substring(0, 12)}...</h5>
                       <p className="card-text lead fw-bold">${price}</p>
-                      <Link to={`/product/${id}`}>
+                      <Link to={`/product/${id}`}>  
                         <Button variant="outline-dark" >
                           Buy now
                         </Button>

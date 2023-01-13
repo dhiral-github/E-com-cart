@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import DismissibleToasts from './DismissibleToasts';
-
+import './successOrder.css';
 const SuccessOrder = () => {
   const { cartOrderSuccess, cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
   const { toastDetails } = useSelector((state) => state.allproducts);
@@ -27,22 +27,15 @@ const SuccessOrder = () => {
           return (
 
             <div className='mb-3 my-3 col-md-8' key={index}>
-              <div style={{ display: 'flex' }}>
-                <div style={{ marginRight: '10px' }}>
-                  
+              <div className='successOrder-contain'>
+                <div className='order-body'>
                 </div>
-                <Image style={{ width: '100px' }} src={image} />
-
-                <div style={{
-                  width: '100%',
-                  marginLeft: '5%',
-                  boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)'
-                }}>
+                <Image className='order-image' src={image} />
+                <div className='order-card'>
                   <div >
-                    <span><h5>{title}</h5></span>
+                    <span className='order-listItem-font'>{title}</span>
                   </div>
-                  <div><h5> ${price}</h5>
-                  </div>
+                  <span className='order-listItem-font'> ${price}</span>
                   <div className='my-2'>Item: {quantity}</div>
                 </div>
               </div>
@@ -50,38 +43,17 @@ const SuccessOrder = () => {
           )
         })
       }
-      <div style={{
-        verticalalign: 'top',
-        width: '20%',
-        marginLeft: 'auto',
-        position: 'absolute',
-        left: '66%',
-        top: '113px',
-      }}>
-        <div style={{ boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)' }}>
+      <div className='order-itemDetail'>
+        <div className='order-priceDetail'>
           <div>
-            <span style={{
-              boxShadow: '0 1px 1px 0 rgb(0 0 0 / 20%)',
-              display: 'block',
-              textTransform: 'uppercase',
-              padding: '13px 24px',
-              color: '#878787',
-              minHeight: '47px',
-              borderRadius: ' 2px 2px 0 0',
-              backgroundColor: '#f5f5f5',
-              textAlign: 'center'
-            }}>
+            <span className='success-boxTitle'>
               Price details
             </span>
             <div>
               <span>Total item: ({totalQuantity})</span>
             </div>
             <div>
-              <span style={{
-                fontWeight: '500',
-                fontSize: '18px'
-              }}
-              >Total amount: ({cartsDetail.totalPrice})
+              <span className='order-listItem-font'>Total amount: ({cartsDetail.totalPrice})
               </span>
             </div>
           </div>
@@ -103,7 +75,6 @@ const SuccessOrder = () => {
           </ul>
         </div>
       </div>
-
     </div>
   )
 }

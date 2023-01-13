@@ -10,6 +10,7 @@ const intialState = {
     type: 'success',
     message: '',
   },
+  searchText: '',
   carts: {
     cartsItem: [],
     cartsDetail: {
@@ -18,7 +19,6 @@ const intialState = {
     },
     cartOrderSuccess: [],
   },
-  searchText: '',
   filterData: {
     rangePrice: [0, 1000],
     categoryFilter: '',

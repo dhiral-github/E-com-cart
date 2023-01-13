@@ -1,0 +1,38 @@
+.filter-contain {
+  text-align: center;
+}
+
+.filter-body {
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  border: 1px black solid;
+  display: inline-block;
+  background-color: aliceblue;
+}
+
+.filter-priceRange {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-price {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  display: inline-block;
+  background-color: aliceblue;
+}
+
+.filter-clear {
+  cursor: pointer;
+  color: #2874f0;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: none;
+  background: white;
+}

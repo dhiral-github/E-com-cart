@@ -6,9 +6,7 @@ import { useDispatch } from 'react-redux';
 import { suucessOrderData } from '../../redux/actionCreators/productActions';
 
 const CartPlaceOrder = () => {
-
   const [cartOrder, setcartOrder] = useState({})
-
   const dispatch = useDispatch();
   let totalQuantity = 0;
   const { cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
@@ -16,7 +14,7 @@ const CartPlaceOrder = () => {
   cartsItem.forEach(item => {
     totalQuantity += item.quantity
   });
-  console.log('getCart from add to cart==>>>', cartsItem);
+
   const handleChangeOrder = (e) => {
     setcartOrder({
       ...cartOrder,
@@ -25,7 +23,6 @@ const CartPlaceOrder = () => {
 
   }
   const deliverProduct = (cartOrderDetail) => {
-    console.log('deliverProduct cartsItem===>>>', cartOrderDetail);
     dispatch(suucessOrderData({
       ...cartOrderDetail,
     }))
@@ -33,7 +30,6 @@ const CartPlaceOrder = () => {
   }
 
   return (
-
     <div className='col-lg-12' >
       <div className="col-lg-6">
         <h4>Delivery Address</h4>
@@ -80,7 +76,8 @@ const CartPlaceOrder = () => {
 
           <div style={{ display: 'flex' }}>
             <Link to={`/successOrder`}>
-              <Button style={{
+              <Button 
+              style={{
                 background: '#fb641b',
                 boxShadow: '0 1px 2px 0 rgb(0 0 0 / 20%)',
                 border: 'none',
@@ -104,7 +101,8 @@ const CartPlaceOrder = () => {
           </div>
         </Form>
       </div>
-      <div style={{
+      <div className='' 
+      style={{
         verticalalign: 'top',
         width: '20%',
         marginLeft: 'auto',
@@ -145,6 +143,5 @@ const CartPlaceOrder = () => {
     </div>
   );
 }
-
 
 export default CartPlaceOrder;
