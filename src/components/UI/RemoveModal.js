@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button, Image, Modal } from 'react-bootstrap';
+import './removeModal.css';
 
 const RemoveModal = (props) => {
   const { removeItem, show, onHide, deleteCartItem } = props
   const { id, title, image } = removeItem;
-  console.log('removeItem', removeItem);
-  // debugger
+
   return (
     <div>
       <Modal
@@ -24,14 +24,9 @@ const RemoveModal = (props) => {
           <h4>
             Are you sure to delete this item?
           </h4>
-          <div style={{
-              display: 'flex',
-              justifyContent:'space-evenly',
-              alignItems: 'center',
-              width: '32%',
-              }}>
-            <Image src={image} style={{width:'70px',}}/>
-            <div >{title}</div>
+          <div className='delete-item'>
+            <Image src={image} style={{ width: '70px', }} />
+            <div style={{ marginLeft: '13px' }}>{title}</div>
           </div>
         </Modal.Body>
         <Modal.Footer>

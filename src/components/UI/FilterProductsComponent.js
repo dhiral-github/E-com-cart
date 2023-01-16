@@ -79,12 +79,13 @@ const FilterProductsComponent = (props) => {
           <div className='rating-filter'>Customer Ratings</div>
           <div className='RatingProduct'>
             <div >
-              <Form.Check label='4 * & above' value={4} onChange={onRatingStar} />
+              <input type='checkbox' value={4} onChange={onRatingStar} /> 4
+              <span style={{ fontSize: '1rem',marginLeft:'3px' }} className="bi bi-star-fill"> & above</span>
             </div>
             <div >
-              <Form.Check label='3 * & above' value={3} onChange={onRatingStar} />
+              <input type='checkbox' value={3} onChange={onRatingStar} /> 3
+              <span style={{ fontSize: '1rem',marginLeft:'3px' }} className="bi bi-star-fill"> & above</span>
             </div>
-
           </div>
         </div>
       </section>
