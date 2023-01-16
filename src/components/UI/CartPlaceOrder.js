@@ -34,42 +34,42 @@ const CartPlaceOrder = () => {
       <div className="col-lg-6">
         <h4>Delivery Address</h4>
         <Form style={{ border: '1px solid aliceblue' }}>
-          <Form.Group className="mb-4" controlId="formBasicTitle">
+          <Form.Group className="mb-4" controlid="formBasicTitle">
             <Form.Label>Name</Form.Label>
             <Form.Control type="text" placeholder="Enter Name" name='name' onChange={handleChangeOrder} />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formBasicTitle">
+          <Form.Group className="mb-4" controlid="formBasicTitle">
             <Form.Label>Address</Form.Label>
             <Form.Control type="text" placeholder="Enter Address" name='address' onChange={handleChangeOrder} />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formBasicTitle">
+          <Form.Group className="mb-4" controlid="formBasicTitle">
             <Form.Label>Contact number</Form.Label>
             <Form.Control type="number" placeholder="Enter Number" name='contactNumber' onChange={handleChangeOrder} />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formBasicTitle">
+          <Form.Group className="mb-4" controlid="formBasicTitle">
             <Form.Label>Pin code</Form.Label>
             <Form.Control type="number" placeholder="Enter Pin code number" name='pinCode' onChange={handleChangeOrder} />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formBasicTitle">
+          <Form.Group className="mb-4" controlid="formBasicTitle">
             <Form.Label>City/District/Town</Form.Label>
             <Form.Control type="text" placeholder="Enter City/District/Town" name='CityDistrictTown' onChange={handleChangeOrder} />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formBasicTitle">
+          <Form.Group className="mb-4" controlid="formBasicTitle">
             <Form.Label>State</Form.Label>
             <Form.Control type="text" placeholder="Enter State" name='State' onChange={handleChangeOrder} />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formBasicTitle">
+          <Form.Group className="mb-4" controlid="formBasicTitle">
             <Form.Label>Landmark(Optional)</Form.Label>
             <Form.Control type="text" placeholder="Enter Landmark(Optional)" name='landmarkOptional' onChange={handleChangeOrder} />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formBasicTitle">
+          <Form.Group className="mb-4" controlid="formBasicTitle">
             <Form.Label>Alternate Phone(Optional)</Form.Label>
             <Form.Control type="text" placeholder="Enter Alternate Phone(Optional)" name='alternatePhone' onChange={handleChangeOrder} />
           </Form.Group>

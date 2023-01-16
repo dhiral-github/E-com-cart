@@ -5,11 +5,18 @@ import { showproductModal, addnewProduct, updateProduct, selectedProduct } from 
 import { useDispatch } from 'react-redux';
 
 const AddProductModal = () => {
-  const [formData, setformData] = useState({});
+  const [formData, setformData] = useState({
+    id: '',
+    title: '',
+    price: '',
+    description: '',
+    image: '',
+    category: '',
+  });
   const [toast, setToast] = useState(true);
   const dispatch = useDispatch();
   const { showProductModal } = useSelector((state) => state.allproducts);
-  const product = useSelector((state) => state.allproducts.selectedProduct);
+  const EditProduct = useSelector((state) => state.allproducts.selectedProduct);
 
   const handleClose = () => {
     dispatch(showproductModal(false))
@@ -17,19 +24,18 @@ const AddProductModal = () => {
   }
 
   const handleChange = (e) => {
-    // debugger
     setformData({
       ...formData,
-      [e.target.name]: e.target.name === 'image' ?  URL.createObjectURL(e.target.files[0]) : e.target.value,
+      [e.target.name]: e.target.name === 'image' ? URL.createObjectURL(e.target.files[0]) : e.target.value,
     });
   };
 
   const handleSave = (productUpdate) => {
-      
-      const formDataFileUpload = new FormData();
-      formDataFileUpload.append("file", formData);
 
-    if (Object.keys(product).length > 0) {
+    const formDataFileUpload = new FormData();
+    formDataFileUpload.append("file", formData);
+
+    if (Object.keys(EditProduct).length > 0) {
 
       dispatch(updateProduct(productUpdate));
       handleClose();
@@ -47,13 +53,15 @@ const AddProductModal = () => {
     }
   }
   useEffect(() => {
-    if (product) {
-      setformData(product);
+    if (Object.keys(EditProduct).length > 0) {
+      setformData(EditProduct);
+    } else {
+      setformData(EditProduct);
     }
-  }, [product])
+  }, [EditProduct])
 
-  const pageTitle = product.id ? 'Edit Product ' : 'Add Product';
-  const buttonTitle = product.id ? 'Update' : 'Submit';
+  const pageTitle = EditProduct.id ? 'Edit Product ' : 'Add Product';
+  const buttonTitle = EditProduct.id ? 'Update' : 'Submit';
   return (
     <>
       <Modal
@@ -64,27 +72,27 @@ const AddProductModal = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-4" controlId="formBasicTitle">
+            <Form.Group className="mb-4" controlid="formBasicTitle">
               <Form.Label>Title</Form.Label>
               <Form.Control type="text" placeholder="Enter Title" name='title' value={formData.title} onChange={handleChange} />
 
             </Form.Group>
-            <Form.Group className="mb-4" controlId="formBasicTitle">
+            <Form.Group className="mb-4" controlid="formBasicTitle">
               <Form.Label>Category</Form.Label>
               <Form.Control type="text" placeholder="Enter Category" name='category' value={formData.category} onChange={handleChange} />
 
             </Form.Group>
-            <Form.Group className="mb-4" controlId="formBasicTitle">
+            <Form.Group className="mb-4" controlid="formBasicTitle">
               <Form.Label>Description</Form.Label>
               <Form.Control type="text" placeholder="Enter Description" name='description' value={formData.description} onChange={handleChange} />
 
             </Form.Group>
-            <Form.Group className="mb-4" controlId="formBasicTitle">
+            <Form.Group className="mb-4" controlid="formBasicTitle">
               <Form.Label>Price</Form.Label>
               <Form.Control type="number" placeholder="Enter Price" name='price' value={formData.price} onChange={handleChange} />
 
             </Form.Group>
-            <div className="mb-4" controlId="formBasicTitle">
+            <div className="mb-4" controlid="formBasicTitle">
               <span>Image</span>
               <input type="file" name='image' onChange={handleChange} />
 
