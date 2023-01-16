@@ -44,7 +44,7 @@ const FilterProductsComponent = (props) => {
           />
 
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className='price-range-input'>
           <input type='number' style={{ width: '100px' }} value={rangePrice[0]} onChange={minChange}></input>
           <input type='number' style={{ width: '100px' }} value={rangePrice[1]} onChange={maxChange}></input>
         </div>
@@ -53,15 +53,7 @@ const FilterProductsComponent = (props) => {
       <hr />
       <section>
         <div
-          className='mb-2'
-          style={{
-            fontSize: '14px',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: ' .3px',
-            display: 'inline-block',
-            backgroundColor: 'aliceblue'
-          }}>Category</div>
+          className='filter-category mb-2'>Category</div>
         <div>
           <Form.Control
             as="select"
@@ -84,15 +76,7 @@ const FilterProductsComponent = (props) => {
       <hr />
       <section>
         <div>
-          <div style={{
-            fontSize: '14px',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '.3px',
-            display: 'inline-block',
-            backgroundColor: 'aliceblue'
-          }}>Customer Ratings</div>
-
+          <div className='rating-filter'>Customer Ratings</div>
           <div className='RatingProduct'>
             <div >
               <Form.Check label='4 * & above' value={4} onChange={onRatingStar} />
