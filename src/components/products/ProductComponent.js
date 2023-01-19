@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showproductModal, deleteProduct, selectedProduct, setFilterProducts, categoryFilterProducts, setMinPrice, setMaxPrice, ratingStarProducts} from '../../redux/actionCreators/productActions';
+import {
+  showproductModal,
+  deleteProduct,
+  selectedProduct,
+  setFilterProducts,
+  categoryFilterProducts,
+  setMinPrice,
+  setMaxPrice,
+  ratingStarProducts
+} from '../../redux/actionCreators/productActions';
 import CardItemComponent from "../UI/CardItemComponent";
 import FilterProductsComponent from "../UI/FilterProductsComponent";
 import NoDataAvailable from "../UI/NoDataAvailable";

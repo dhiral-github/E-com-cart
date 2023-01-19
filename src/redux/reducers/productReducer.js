@@ -28,7 +28,7 @@ const intialState = {
   },
   wishList: {
     wishListItem: [],
-    totalWishListItem:0
+    totalWishListItem: 0
   }
 };
 
@@ -248,7 +248,7 @@ const productReducer = (state = intialState, action) => {
         ...state,
         wishList: {
           wishListItem: tempWishlistItem,
-          totalWishListItem:tempWishlistItem.length
+          totalWishListItem: tempWishlistItem.length
         }
       }
     }

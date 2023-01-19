@@ -14,9 +14,8 @@ const FilterProductsComponent = (props) => {
   const clearFilter = () => {
     dispatch(clearFilterProducts());
   }
-
   const catName = products.map((obj) => obj.category)
-  let cateObj = [...new Set(catName)]
+  let cateObj = [...new Set(catName)];
 
   return (
     <>
