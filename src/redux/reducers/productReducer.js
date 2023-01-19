@@ -24,9 +24,12 @@ const intialState = {
     categoryFilter: '',
     min: '',
     max: '',
-    ratingStar:0
+    ratingStar: 0
   },
-
+  wishList: {
+    wishListItem: [],
+    totalWishListItem:0
+  }
 };
 
 const productReducer = (state = intialState, action) => {
@@ -94,6 +97,7 @@ const productReducer = (state = intialState, action) => {
       if (!isItemExist) {
         cartsItem.push(payload);
       }
+
       cartsItem.forEach((i) => {
         if (!i['quantity']) {
           i["quantity"] = 1;
@@ -220,12 +224,31 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "RATING_STAR": {
-      // debugger
       return {
         ...state,
-        filterData:{
+        filterData: {
           ...state.filterData,
-          ratingStar : payload
+          ratingStar: payload
+        }
+      }
+    }
+    case "WISH_LIST": {
+      const { wishListItem } = state.wishList;
+      let tempWishlistItem = [...wishListItem]
+      const wishItem = wishListItem.find((i) => Number(i.id) === Number(payload.id));
+
+      if (!wishItem) {
+        tempWishlistItem.push(payload);
+      } else {
+        tempWishlistItem = wishListItem.filter((i) => i.id !== payload.id)
+        console.log('WISH_LIST tempWishlistItem =====>>', tempWishlistItem);
+      }
+
+      return {
+        ...state,
+        wishList: {
+          wishListItem: tempWishlistItem,
+          totalWishListItem:tempWishlistItem.length
         }
       }
     }

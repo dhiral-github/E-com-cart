@@ -8,7 +8,8 @@ import { setSearchData, showproductModal } from '../redux/actionCreators/product
 export default function Navbar(props) {
   const dispatch = useDispatch();
   let location = useLocation();
-  const { totalCartItem } = useSelector((state) => state.allproducts.carts.cartsDetail)
+  const { totalCartItem } = useSelector((state) => state.allproducts.carts.cartsDetail);
+  const { totalWishListItem } = useSelector((state) => state.allproducts.wishList);
 
   useEffect(() => {
     return () => {
@@ -27,18 +28,19 @@ export default function Navbar(props) {
     {
       label: "Home",
       path: "home",
-      className: "nav-link",
     },
     {
       label: "Add product",
       onClick: handleClick,
-      className: "nav-link"
     },
     {
       label: `Cart (${totalCartItem})`,
       path: 'carts',
-      className: "nav-link"
     },
+    {
+      label: `Wish List (${totalWishListItem})`,
+      path: 'wishList',
+    }
 
   ];
   return (
@@ -60,7 +62,6 @@ export default function Navbar(props) {
                 path={lItem.path}
                 location={location.pathname}
                 linkStyle={{ backgroundColor: 'white' }}
-                className={lItem.className}
                 handleClick={lItem?.onClick}
                 style={lItem.style}
               />

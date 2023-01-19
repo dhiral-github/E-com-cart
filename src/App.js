@@ -6,6 +6,7 @@ import ProductDetail from "./components/products/ProductDetail";
 import AddToCart from "./components/UI/AddToCart";
 import CartPlaceOrder from "./components/UI/CartPlaceOrder";
 import SuccessOrder from "./components/UI/SuccessOrder";
+import WishListItem from "./components/UI/WishListItem";
 // https://fakestoreapi.com/
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                 <Route exact path="/:carts" element={<AddToCart />} />
                 <Route exact path="/cart/placeOrder" element={<CartPlaceOrder />} />
                 <Route exact path="/successOrder" element={<SuccessOrder />} />
+                <Route exact path="/wishList" element={<WishListItem />} />
               </Routes>
             </div>
           </div>

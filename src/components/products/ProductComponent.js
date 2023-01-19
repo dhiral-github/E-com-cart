@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { showproductModal, deleteProduct, selectedProduct, setFilterProducts, categoryFilterProducts, setMinPrice, setMaxPrice, ratingStarProducts } from '../../redux/actionCreators/productActions';
+import { showproductModal, deleteProduct, selectedProduct, setFilterProducts, categoryFilterProducts, setMinPrice, setMaxPrice, ratingStarProducts, wishListPRoducts } from '../../redux/actionCreators/productActions';
+import CardItemComponent from "../UI/CardItemComponent";
 import FilterProductsComponent from "../UI/FilterProductsComponent";
 import NoDataAvailable from "../UI/NoDataAvailable";
 import SpinnerLoading from "../UI/SpinnerLoading";
@@ -12,8 +13,8 @@ const ProductComponent = () => {
   const dispatch = useDispatch();
   const { products, productLoading, searchText } = useSelector((state) => state.allproducts);
   const { rangePrice, categoryFilter, ratingStar } = useSelector((state) => state.allproducts.filterData);
+  const { wishListItem } = useSelector((state) => state.allproducts.wishList);
   const [filterProductData, setFilterData] = useState(products);
-  console.log('filterData===>>>>', filterProductData);
 
   const handleEdit = (id) => {
     const selectedObj = products.find((prodObj) => (prodObj.id === id));
@@ -85,23 +86,29 @@ const ProductComponent = () => {
             ) :
 
             filterProductData?.map((product, index) => {
-              const { id, title, image, price } = product;
+              // const { id, title, image, price } = product;
               return (
                 <div className="col-md-3 mb-4" key={index}>
-                  <div className="card h-100 text-center p-4" >
-                    <img src={image} className="card-img-top cardImage"  alt="" height='250px' />
+                  {/* <div className="card h-100 text-center p-4" >
+                    <img src={image} className="card-img-top cardImage" alt="" height='250px' />
                     <div className="card-body">
                       <h5 className="card-title mb-0">{title?.substring(0, 12)}...</h5>
                       <p className="card-text lead fw-bold">${price}</p>
-                      <Link to={`/product/${id}`}>  
+                      <Link to={`/product/${id}`}>
                         <Button variant="outline-dark" >
                           Buy now
                         </Button>
                       </Link>
                       <Button variant="outline-dark" className="mx-1" onClick={() => handleEdit(id)} > Edit </Button>
                       <Button variant="outline-dark" className="mx-1" onClick={() => handleDelete(id)} > Delete </Button>
+                      <span>
+                        <i style={{ color: 'red', fontSize: '28px', position: 'absolute' }} className={
+                          wishListItem.find((i)=> i.id === id) ? 'bi bi-suit-heart-fill' : 'bi bi-suit-heart'
+                        } onClick={() => changeColor(product)}></i>
+                      </span>
                     </div>
-                  </div>
+                    </div> */}
+                  <CardItemComponent product={product} handleEdit={handleEdit} handleDelete={handleDelete} />
                 </div>
               )
             })
