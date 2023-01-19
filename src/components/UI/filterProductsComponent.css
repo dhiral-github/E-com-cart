@@ -58,3 +58,7 @@
   display: inline-block;
   background-color: aliceblue;
 }
+.rating-style{
+  font-size: 1rem;
+  margin-left: 3px;
+}

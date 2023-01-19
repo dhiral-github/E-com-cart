@@ -9,15 +9,13 @@ const CardItemComponent = (props) => {
   const { wishListItem } = useSelector((state) => state.allproducts.wishList);
   const { product, handleEdit, handleDelete } = props;
   const { id, title, image, price } = product;
-  console.log('props ===>>>', wishListItem);
 
   const changeColor = (wishList) => {
-    console.log('changeColor==>>>', wishList);
     dispatch(wishListPRoducts(wishList))
   }
   return (
     <div className="card h-100 text-center p-4" >
-      <img src={image} className="card-img-top cardImage" alt="" height='250px' />
+      <img src={image} className={`card-img-top ${window.location.pathname === '/wishList' ? '' : 'cardImage'}`} alt="" height='250px' />
       <div className="card-body">
         <h5 className="card-title mb-0">{title?.substring(0, 12)}...</h5>
         <p className="card-text lead fw-bold">${price}</p>

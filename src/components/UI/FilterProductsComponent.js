@@ -80,11 +80,11 @@ const FilterProductsComponent = (props) => {
           <div className='RatingProduct'>
             <div >
               <input type='checkbox' value={4} onChange={onRatingStar} /> 4
-              <span style={{ fontSize: '1rem',marginLeft:'3px' }} className="bi bi-star-fill"> & above</span>
+              <span  className="bi bi-star-fill rating-style"> & above</span>
             </div>
             <div >
               <input type='checkbox' value={3} onChange={onRatingStar} /> 3
-              <span style={{ fontSize: '1rem',marginLeft:'3px' }} className="bi bi-star-fill"> & above</span>
+              <span  className="bi bi-star-fill rating-style"> & above</span>
             </div>
           </div>
         </div>

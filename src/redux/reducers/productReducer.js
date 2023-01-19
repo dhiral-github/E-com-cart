@@ -51,8 +51,8 @@ const productReducer = (state = intialState, action) => {
     case "SELECTED_PRODUCTS": {
       console.log('[...state.payload]====>>>', payload);
       const objBuyNow = [...state.products];
-      const dataObj = objBuyNow.find((item) => {
-        return Number(item.id) === Number(payload)
+      const dataObj = objBuyNow.find((i) => {
+        return Number(i.id) === Number(payload)
       });
       console.log('dataObj=====>>', dataObj);
 
@@ -108,7 +108,7 @@ const productReducer = (state = intialState, action) => {
         }
         // cartTotalPrice += i.price * i.quantity;
       });
-      const cartTotalPrice = cartsItem.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+      const cartTotalPrice = cartsItem.reduce((total, i) => total + i.price * i.quantity, 0).toFixed(2);
       return {
         ...state,
         carts: {
@@ -123,8 +123,8 @@ const productReducer = (state = intialState, action) => {
 
     case "DELETE_TO_CART": {
       const proState = [...state.carts.cartsItem];
-      const remainProducts = proState.filter((item) => item.id !== payload)
-      const remainTotalPrice = remainProducts.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+      const remainProducts = proState.filter((i) => i.id !== payload)
+      const remainTotalPrice = remainProducts.reduce((total, i) => total + i.price * i.quantity, 0).toFixed(2);
 
       return {
         ...state,
@@ -142,7 +142,7 @@ const productReducer = (state = intialState, action) => {
     case "UPDATE_PRODUCT": {
       const { id } = payload;
       const proState = [...state.products];
-      const findObject = proState.findIndex((item) => item.id === id)
+      const findObject = proState.findIndex((i) => i.id === id)
       proState.splice(findObject, 1, payload)
       return {
         ...state,
@@ -157,7 +157,7 @@ const productReducer = (state = intialState, action) => {
     }
     case "DELETE_PRODUCT": {
       const proState = [...state.products];
-      const deleteId = proState.filter((item) => item.id !== payload)
+      const deleteId = proState.filter((i) => i.id !== payload)
       return {
         ...state,
         products: deleteId
