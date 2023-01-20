@@ -86,11 +86,8 @@ const ProductComponent = () => {
         {
           productLoading ?
             (
-              <div style={{ marginLeft: '660px' }}>
-                <SpinnerLoading text='Loading products...' />
-              </div>
+              <div className='loading-product'><SpinnerLoading text='Loading products...' /></div>
             ) :
-
             filterProductData?.map((product, index) => {
               return (
                 <div className="col-md-3 mb-4" key={index}>

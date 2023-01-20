@@ -3,10 +3,16 @@
   flex-flow: row;
   max-width: 280px;
 }
-.productHome{
+
+.productHome {
   display: flex;
   flex-wrap: wrap;
 }
-.cardImage{
+
+.cardImage {
   padding: 26px 49px 27px 66px;
+}
+
+.loading-product {
+  margin-left: 660px;
 }

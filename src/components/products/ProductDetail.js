@@ -43,7 +43,7 @@ const ProductDetail = () => {
               </div>
               <div className="proDetail-contain">
                 <div className="proDetail-Title">{title}</div>
-                <div className="proDetail-Price">${price}</div>
+                <div className="proDetail-Price">$ {price}</div>
                 <div className="proDetail-Category mb-3">{category}</div>
                 <h6>{description}</h6>
                 <div className="mt-3" tabIndex="0">

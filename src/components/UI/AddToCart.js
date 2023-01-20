@@ -53,7 +53,7 @@ const AddToCart = () => {
                   <div className='addToCart-detail mx-3'>
                     <div className='addToCart-title'>{title}</div>
                     <div className='addToCart-category'>{category}</div>
-                    <div className='addToCart-price'>{price}</div>
+                    <div className='addToCart-price'>$ {price}</div>
                     <div>
                       <Link className='addToCart-remove' onClick={() => showRemoveItemModal(true, item)} >REMOVE</Link>
                     </div>

@@ -14,19 +14,19 @@ const SuccessOrder = () => {
   });
 
   return (
-    <div className='col-md-12'>
+    <div className='sucsess-order'>
       {
         toastDetails.showToast &&
         <DismissibleToasts />
       }
-      <span className='mb-3'><h5>🙂 Your Order has been successfully placed. Your item will be delivered within 5 to 7 working days.</h5> </span>
+      <div className='success-placed mb-3'>🙂 Your Order has been successfully placed. Your item will be delivered within 5 to 7 working days.</div>
 
       {
         cartsItem.map((item, index) => {
           const { title, image, price, quantity } = item;
           return (
 
-            <div className='mb-3 my-3 col-md-8' key={index}>
+            <div className='mb-3 my-3 col-md-7' key={index}>
               <div className='successOrder-contain'>
                 <div className='order-body'>
                 </div>
@@ -35,7 +35,7 @@ const SuccessOrder = () => {
                   <div >
                     <span className='order-listItem-font'>{title}</span>
                   </div>
-                  <span className='order-listItem-font'> ${price}</span>
+                  <span className='order-listItem-font'>$ {price}</span>
                   <div className='my-2'>Item: {quantity}</div>
                 </div>
               </div>
@@ -60,7 +60,7 @@ const SuccessOrder = () => {
         </div>
       </div>
       <div style={{ width: '53%' }}>
-        <h5>➡️ Your products will delivered on the address mentioned below.</h5>
+        <div className='product-address mt-2'>➡️ Your products will delivered on the address mentioned below.</div>
         <hr />
         <div>
           <ul>

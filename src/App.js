@@ -14,7 +14,6 @@ function App() {
     <>
       <Router>
         <Navbar title="e-com-cart" />
-        {/* <div className="container p-2 bd-highlight" style={{ display: 'flex', flexFlow: 'wrap', }}> */}
         <div className="home">
           <div className="auto" >
             <div className="comp" style={{ display: 'flex', flexFlow: 'row', }}>
