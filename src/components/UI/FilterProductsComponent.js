@@ -21,7 +21,7 @@ const FilterProductsComponent = (props) => {
     <>
       <section>
         <div className="filter-contain">
-          <div className="filter-body">filter ({`${filterProductsLength} Item`})</div>
+          <div className="filter-body">filter ({`${filterProductsLength} Items`})</div>
         </div>
         <div className='filter-priceRange mt-3'>
           <div>

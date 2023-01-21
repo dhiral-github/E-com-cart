@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { wishListPRoducts } from "../../redux/actionCreators/productActions";
+import { wishListProducts } from "../../redux/actionCreators/productActions";
 import './cardItemComponents.css';
 
 const CardItemComponent = (props) => {
@@ -12,7 +12,7 @@ const CardItemComponent = (props) => {
   const { id, title, image, price } = product;
 
   const changeColor = (wishList) => {
-    dispatch(wishListPRoducts(wishList))
+    dispatch(wishListProducts(wishList))
   }
   return (
     <div className="card h-100 text-center p-4" >

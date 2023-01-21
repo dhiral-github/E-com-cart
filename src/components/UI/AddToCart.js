@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,11 +7,31 @@ import DismissibleToasts from './DismissibleToasts';
 import RemoveModal from './RemoveModal';
 import './addToCart.css';
 
-const AddToCart = () => {
+const AddToCart = (props) => {
+
   const dispatch = useDispatch();
-  let totalQuantity = 0;
+  const { toastDetails } = useSelector((state) => state.allproducts);
+  const { cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
+  console.log('getCart from add to cart==>>>', cartsItem);
+
+  const [cart, setCart] = useState([]);
+  
+  useEffect(() => {
+    if(cartsItem.length === 0){
+     const getCartItems = JSON.parse(localStorage.getItem('cartItems'));
+     setCart(getCartItems);
+    } else {
+      setCart(cartsItem);
+    }
+  }, [cartsItem])
+
   const [removePopUp, setRemovePopUp] = useState(false);
   const [removeItem, setRemoveItem] = useState({});
+
+  let totalQuantity = 0;
+  cartsItem.forEach(item => {
+    totalQuantity += item.quantity
+  });
 
   const deleteCartItem = (id) => {
     dispatch(removeCartItem(id));
@@ -23,14 +43,6 @@ const AddToCart = () => {
     setRemovePopUp(show);
   }
 
-  const { toastDetails } = useSelector((state) => state.allproducts);
-  const { cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
-  console.log('getCart from add to cart==>>>', cartsItem);
-
-  cartsItem.forEach(item => {
-    totalQuantity += item.quantity
-  });
-
   return (
     <div className='container'>
       {
@@ -38,12 +50,13 @@ const AddToCart = () => {
         <DismissibleToasts />
       }
       {
-        cartsItem.length === 0 ?
+        cart.length === 0 ?
           (
             <div className='addToCart-empty'>Cart is empty</div>
           )
           :
-          cartsItem.map((item, index) => {
+          
+          cart.map((item, index) => {
             const { title, image, price, category, quantity } = item;
             return (
 

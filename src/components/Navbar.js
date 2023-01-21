@@ -26,44 +26,43 @@ export default function Navbar(props) {
 
   const listItemArray = [
     {
-      label: "Home",
+      label: "Home ",
       path: "home",
     },
     {
-      label: "Add product",
+      label: "Add product ",
+      name: "add_product",
       onClick: handleClick,
     },
     {
-      label: `Cart (${totalCartItem})`,
+      // label: `Cart (${totalCartItem})`,
+      label: `Cart ${totalCartItem > 0 ? totalCartItem : ''}`,
       path: 'carts',
     },
     {
-      label: `Wish List (${totalWishListItem})`,
+      label: `Wish List ${totalWishListItem > 0 ? totalWishListItem : ''}`,
       path: 'wishList',
     }
-
   ];
+
   return (
-    <nav
-      className={`navbar navbar-expand-lg navbar  bg-light`}
-    >
+    <nav className={`navbar navbar-expand-lg navbar bg-light`}>
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/home">
-          {props.title}
-        </Link>
+        <Link className="navbar-brand" to="/home">{props.title}</Link>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
             {listItemArray.map((lItem) => (
               <ListItem
-                key={`${lItem.label}-list-item`}
-                label={lItem.label}
-                path={lItem.path}
-                location={location.pathname}
+                key={`${lItem?.label}-list-item`}
+                label={lItem?.label}
+                path={lItem?.path}
+                name={lItem?.name}
+                location={location?.pathname}
                 linkStyle={{ backgroundColor: 'white' }}
                 handleClick={lItem?.onClick}
-                style={lItem.style}
+                style={lItem?.style}
               />
 
             ))}

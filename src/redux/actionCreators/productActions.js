@@ -261,7 +261,7 @@ export const ratingStarProducts = (rating) => (dispatch) => {
     payload: rating
   })
 }
-export const wishListPRoducts = (wishiList) => (dispatch) => {
+export const wishListProducts = (wishiList) => (dispatch) => {
   dispatch({
     type: "WISH_LIST",
     payload: wishiList

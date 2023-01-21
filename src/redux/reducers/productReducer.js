@@ -109,6 +109,7 @@ const productReducer = (state = intialState, action) => {
         // cartTotalPrice += i.price * i.quantity;
       });
       const cartTotalPrice = cartsItem.reduce((total, i) => total + i.price * i.quantity, 0).toFixed(2);
+      localStorage.setItem("cartItems", JSON.stringify(cartsItem));
       return {
         ...state,
         carts: {
