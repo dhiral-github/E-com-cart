@@ -15,11 +15,11 @@ const AddToCart = (props) => {
   console.log('getCart from add to cart==>>>', cartsItem);
 
   const [cart, setCart] = useState([]);
-  
+
   useEffect(() => {
-    if(cartsItem.length === 0){
-     const getCartItems = JSON.parse(localStorage.getItem('cartItems'));
-     setCart(getCartItems);
+    if (cartsItem.length === 0) {
+      const getCartItems = JSON.parse(localStorage.getItem('cartItems'));
+      setCart(getCartItems);
     } else {
       setCart(cartsItem);
     }
@@ -55,7 +55,7 @@ const AddToCart = (props) => {
             <div className='addToCart-empty'>Cart is empty</div>
           )
           :
-          
+
           cart.map((item, index) => {
             const { title, image, price, category, quantity } = item;
             return (

@@ -28,7 +28,7 @@ const intialState = {
   },
   wishList: {
     wishListItem: [],
-    totalWishListItem: 0
+    totalWishListItem: 0,
   }
 };
 
@@ -126,6 +126,7 @@ const productReducer = (state = intialState, action) => {
       const proState = [...state.carts.cartsItem];
       const remainProducts = proState.filter((i) => i.id !== payload)
       const remainTotalPrice = remainProducts.reduce((total, i) => total + i.price * i.quantity, 0).toFixed(2);
+      localStorage.setItem("cartItems", JSON.stringify(remainProducts));
 
       return {
         ...state,
@@ -244,7 +245,8 @@ const productReducer = (state = intialState, action) => {
         tempWishlistItem = wishListItem.filter((i) => i.id !== payload.id)
         console.log('WISH_LIST tempWishlistItem =====>>', tempWishlistItem);
       }
-
+      localStorage.setItem("wishItems", JSON.stringify(tempWishlistItem));
+      
       return {
         ...state,
         wishList: {

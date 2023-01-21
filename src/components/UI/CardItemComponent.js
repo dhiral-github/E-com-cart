@@ -11,7 +11,7 @@ const CardItemComponent = (props) => {
   const { product, handleEdit, handleDelete } = props;
   const { id, title, image, price } = product;
 
-  const changeColor = (wishList) => {
+  const handelRemove = (wishList) => {
     dispatch(wishListProducts(wishList))
   }
   return (
@@ -28,7 +28,7 @@ const CardItemComponent = (props) => {
 
         {
           window.location.pathname === '/wishList' ?
-            <Button variant="outline-dark" className="mx-1" onClick={() => changeColor(product)} > Remove wish list </Button>
+            <Button variant="outline-dark" className="mx-1" onClick={() => handelRemove(product)} > Remove wish list </Button>
             :
             <>
               <Button variant="outline-dark" className="mx-1" onClick={() => handleEdit(id)} > Edit </Button>
@@ -41,7 +41,7 @@ const CardItemComponent = (props) => {
                       'bi bi-suit-heart'
                   }
                   onClick={
-                    () => changeColor(product)}>
+                    () => handelRemove(product)}>
                 </i>
               </div>
             </>
