@@ -50,12 +50,12 @@ const ProductComponent = () => {
     }
   }
 
-  const searchProducts = products.filter(i =>
+  const searchProducts = products?.filter(i =>
     (Math.trunc(i.price) === Number(searchText) ||
-      i.title.toLowerCase().match(searchText.toLowerCase()) ||
-      i.description.toLowerCase().match(searchText.toLowerCase()) ||
+      i.title?.toLowerCase().match(searchText?.toLowerCase()) ||
+      i.description?.toLowerCase().match(searchText?.toLowerCase()) ||
       i.id === Number(searchText) ||
-      i.category.toLowerCase().match(searchText.toLowerCase()))
+      i.category?.toLowerCase().match(searchText?.toLowerCase()))
     && (i.price >= rangePrice[0] && i.price <= rangePrice[1])
     && (categoryFilter ? i.category === categoryFilter : true)
     && (ratingStar ? i.rating.rate >= ratingStar : true)

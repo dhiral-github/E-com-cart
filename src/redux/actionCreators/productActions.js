@@ -68,6 +68,7 @@ export const addnewProduct = (pData) => (dispatch) => {
             type: 'success',
             message: 'Product added successfully',
           }))
+          
         }
       })
       .catch((err) => {

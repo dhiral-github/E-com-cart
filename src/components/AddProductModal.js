@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { showproductModal, addnewProduct, updateProduct, selectedProduct } from '../redux/actionCreators/productActions';
 import { useDispatch } from 'react-redux';
 
 const AddProductModal = () => {
-  const [formData, setformData] = useState({
+  const dispatch = useDispatch();
+  const defaultFormData = {
     id: '',
     title: '',
     price: '',
     description: '',
     image: '',
     category: '',
-  });
+  }
+
+  const [formData, setformData] = useState(defaultFormData);
+  const [error, setError] = useState(false);
   const [toast, setToast] = useState(true);
-  const dispatch = useDispatch();
   const { showProductModal } = useSelector((state) => state.allproducts);
   const EditProduct = useSelector((state) => state.allproducts.selectedProduct);
 
   const handleClose = () => {
-    dispatch(showproductModal(false))
-    dispatch(selectedProduct({}))
+    dispatch(showproductModal(false));
+    dispatch(selectedProduct({}));
+    setError({});
   }
 
   const handleChange = (e) => {
@@ -31,32 +35,46 @@ const AddProductModal = () => {
   };
 
   const handleSave = (productUpdate) => {
-
     const formDataFileUpload = new FormData();
     formDataFileUpload.append("file", formData);
-
-    if (Object.keys(EditProduct).length > 0) {
-
-      dispatch(updateProduct(productUpdate));
-      handleClose();
-      setToast(!toast)
+    if (
+      !Object.keys(productUpdate).length ||
+      !productUpdate.title ||
+      !productUpdate.category ||
+      !productUpdate.description ||
+      !productUpdate.price
+    ) {
+      setError({
+        titleError: !productUpdate.title,
+        categoryError: !productUpdate.category,
+        descriptionError: !productUpdate.description,
+        priceError: !productUpdate.price,
+      })
     } else {
-      dispatch(addnewProduct({
-        id: new Date().getTime().toString(),
-        ...productUpdate,
-      }));
-
-      setformData({});
-      handleClose();
-      dispatch(selectedProduct({}));
-      setToast(!toast)
+      if (Object.keys(EditProduct).length > 0) {
+        dispatch(updateProduct(productUpdate));
+        handleClose();
+        setToast(!toast)
+        setError({});
+        setformData(defaultFormData);
+      } else {
+        dispatch(addnewProduct({
+          id: new Date().getTime().toString(),
+          ...productUpdate,
+        }));
+        setformData(defaultFormData);
+        handleClose();
+        dispatch(selectedProduct({}));
+        setToast(!toast)
+      }
     }
   }
+
   useEffect(() => {
     if (Object.keys(EditProduct).length > 0) {
       setformData(EditProduct);
     } else {
-      setformData(EditProduct);
+      setformData(defaultFormData)
     }
   }, [EditProduct])
 
@@ -71,43 +89,51 @@ const AddProductModal = () => {
           <Modal.Title>{pageTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group className="mb-4" controlid="formBasicTitle">
-              <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Enter Title" name='title' value={formData.title} onChange={handleChange} />
-
-            </Form.Group>
-            <Form.Group className="mb-4" controlid="formBasicTitle">
-              <Form.Label>Category</Form.Label>
-              <Form.Control type="text" placeholder="Enter Category" name='category' value={formData.category} onChange={handleChange} />
-
-            </Form.Group>
-            <Form.Group className="mb-4" controlid="formBasicTitle">
-              <Form.Label>Description</Form.Label>
-              <Form.Control type="text" placeholder="Enter Description" name='description' value={formData.description} onChange={handleChange} />
-
-            </Form.Group>
-            <Form.Group className="mb-4" controlid="formBasicTitle">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="number" placeholder="Enter Price" name='price' value={formData.price} onChange={handleChange} />
-
-            </Form.Group>
-            <div className="mb-4" controlid="formBasicTitle">
-              <span>Image</span>
-              <input type="file" name='image' onChange={handleChange} />
-
-            </div>
-          </Form>
-
+          <div className="form-group">
+            <label className="mb-1">Title<span className="text-danger"> *</span></label>
+            <input type="text" placeholder="Enter Title" name='title' className="form-control" value={formData.title} onChange={handleChange} />
+            {error?.titleError && (
+              <div style={{ color: "red" }}>
+                Please provide title.
+              </div>
+            )}
+          </div>
+          <div className="form-group">
+            <label className="mb-1 mt-3">Category<span className="text-danger"> *</span></label>
+            <input type="text" className="form-control" placeholder="Enter Category" name='category' value={formData.category} onChange={handleChange} />
+            {error?.categoryError && (
+              <div style={{ color: "red" }}>
+                Please provide category.
+              </div>
+            )}
+          </div>
+          <div className="form-group">
+            <label className="mb-1 mt-3">Description<span className="text-danger"> *</span></label>
+            <input type="text" placeholder="Enter Description" name='description' className="form-control" value={formData.description} onChange={handleChange} />
+            {error?.descriptionError && (
+              <div style={{ color: "red" }}>
+                Please provide description.
+              </div>
+            )}
+          </div>
+          <div className="form-group">
+            <label className="mb-1 mt-3">Price<span className="text-danger"> *</span></label>
+            <input type="number" placeholder="Enter Price" name='price' value={formData.price} onChange={handleChange} className="form-control" />
+            {error?.priceError && (
+              <div style={{ color: "red" }}>
+                Please provide price.
+              </div>
+            )}
+          </div>
+          <div className="mb-4 mt-3" controlid="formBasicTitle">
+            <span>Image</span>
+            <input type="file" name='image' onChange={handleChange} />
+          </div>
+          <p className="text-center mb-0">
+            <button className="btn btn-primary btn-lg w-10 text-uppercase modal-button" onClick={() => handleSave(formData)} >{buttonTitle}</button>
+            <button className="btn btn-primary btn-lg w-10 text-uppercase modal-button mx-2" onClick={handleClose}>Close</button>
+          </p>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={() => handleSave(formData)}>
-            {buttonTitle}
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   )

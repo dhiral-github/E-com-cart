@@ -16,3 +16,8 @@
 .loading-product {
   margin-left: 660px;
 }
+
+.modal-button {
+  height: 40px;
+  font-size: 16px;
+}
