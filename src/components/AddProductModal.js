@@ -80,6 +80,7 @@ const AddProductModal = () => {
 
   const pageTitle = EditProduct.id ? 'Edit Product ' : 'Add Product';
   const buttonTitle = EditProduct.id ? 'Update' : 'Submit';
+  
   return (
     <>
       <Modal
@@ -126,7 +127,7 @@ const AddProductModal = () => {
             )}
           </div>
           <div className="mb-4 mt-3" controlid="formBasicTitle">
-            <span>Image</span>
+            <span>Image </span>
             <input type="file" name='image' onChange={handleChange} />
           </div>
           <p className="text-center mb-0">
