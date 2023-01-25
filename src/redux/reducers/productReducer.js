@@ -22,8 +22,6 @@ const intialState = {
   filterData: {
     rangePrice: [0, 1000],
     categoryFilter: '',
-    min: '',
-    max: '',
     ratingStar: 0
   },
   wishList: {
@@ -49,7 +47,6 @@ const productReducer = (state = intialState, action) => {
       };
     }
     case "SELECTED_PRODUCTS": {
-      console.log('[...state.payload]====>>>', payload);
       const objBuyNow = [...state.products];
       const dataObj = objBuyNow.find((i) => {
         return Number(i.id) === Number(payload)
@@ -109,16 +106,17 @@ const productReducer = (state = intialState, action) => {
         // cartTotalPrice += i.price * i.quantity;
       });
       const cartTotalPrice = cartsItem.reduce((total, i) => total + i.price * i.quantity, 0).toFixed(2);
-      localStorage.setItem("cartItems", JSON.stringify(cartsItem));
+      const cartData = {
+        cartsItem: cartsItem,
+        cartsDetail: {
+          totalPrice: Number(cartTotalPrice),
+          totalCartItem: cartsItem.length,
+        },
+      }
+      localStorage.setItem("cartItems", JSON.stringify(cartData));
       return {
         ...state,
-        carts: {
-          cartsItem: cartsItem,
-          cartsDetail: {
-            totalPrice: Number(cartTotalPrice),
-            totalCartItem: cartsItem.length,
-          },
-        },
+        carts: cartData,
       }
     }
 
@@ -180,7 +178,8 @@ const productReducer = (state = intialState, action) => {
         searchText: payload
       }
     }
-    case "FILTER_PRODUCTS": {
+    case "RANGE_PRICE": {
+      localStorage.setItem("setRangePrice", JSON.stringify(payload));
       return {
         ...state,
         filterData: {
@@ -197,6 +196,7 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "CATEGORY_FILTER_PRODUCTS": {
+      localStorage.setItem("setFilterCategory", JSON.stringify(payload));
       return {
         ...state,
         filterData: {
@@ -206,22 +206,25 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "SET_MIN_PRICE": {
+
+      const setMinPrice = [Number(payload), state.filterData.rangePrice[1]];
+      localStorage.setItem("setRangePrice", JSON.stringify(setMinPrice));
       return {
         ...state,
         filterData: {
           ...state.filterData,
-          rangePrice: [payload, state.filterData.rangePrice[1]],
-          min: payload,
+          rangePrice: setMinPrice
         }
       }
     }
     case "SET_MAX_PRICE": {
+      const setMaxPrice = [state.filterData.rangePrice[0], Number(payload)];
+      localStorage.setItem("setRangePrice", JSON.stringify(setMaxPrice));
       return {
         ...state,
         filterData: {
           ...state.filterData,
-          rangePrice: [state.filterData.rangePrice[0], payload],
-          max: payload,
+          rangePrice: setMaxPrice
         }
       }
     }
@@ -238,7 +241,6 @@ const productReducer = (state = intialState, action) => {
       const { wishListItem } = state.wishList;
       let tempWishlistItem = [...wishListItem]
       const wishItem = wishListItem.find((i) => Number(i.id) === Number(payload.id));
-
       if (!wishItem) {
         tempWishlistItem.push(payload);
       } else {
@@ -246,13 +248,30 @@ const productReducer = (state = intialState, action) => {
         console.log('WISH_LIST tempWishlistItem =====>>', tempWishlistItem);
       }
       localStorage.setItem("wishItems", JSON.stringify(tempWishlistItem));
-      
+
       return {
         ...state,
         wishList: {
           wishListItem: tempWishlistItem,
           totalWishListItem: tempWishlistItem.length
         }
+      }
+    }
+    case "SET_LOCAL_REDUX_DATA": {
+      console.log('payload SET_LOCAL_REDUX_DATA ', payload);
+      return {
+        ...state,
+        wishList: {
+          wishListItem: payload,
+          totalWishListItem: payload.length
+        }
+      }
+    }
+    case "SET_LOCAL_REDUX_CART": {
+      console.log('payload SET_LOCAL_REDUX_CART ', payload);
+      return {
+        ...state,
+        carts: payload,
       }
     }
 

@@ -8,7 +8,9 @@ import {
   categoryFilterProducts,
   setMinPrice,
   setMaxPrice,
-  ratingStarProducts
+  ratingStarProducts,
+  setLocalReduxCart,
+  setLocalReduxWish
 } from '../../redux/actionCreators/productActions';
 import CardItemComponent from "../UI/CardItemComponent";
 import FilterProductsComponent from "../UI/FilterProductsComponent";
@@ -63,8 +65,30 @@ const ProductComponent = () => {
   console.log('filterProducts==>>>', searchProducts);
 
   useEffect(() => {
+    const wishDataFrmLocal = JSON.parse(localStorage.getItem('wishItems'));
+    const cartsDataFrmLocal = JSON.parse(localStorage.getItem('cartItems'));
+    if (wishDataFrmLocal?.length) {
+      dispatch(setLocalReduxWish(wishDataFrmLocal));
+    }
+    if (Object.keys(cartsDataFrmLocal)?.length) {
+      dispatch(setLocalReduxCart(cartsDataFrmLocal));
+    }
     setFilterData(searchProducts);
-  }, [products, searchText, rangePrice, categoryFilter, ratingStar])
+  }, [products, searchText, rangePrice, categoryFilter, ratingStar, dispatch])
+
+  useEffect(() => {
+    const getRangePrice = JSON.parse(localStorage.getItem('setRangePrice'));
+    if (getRangePrice.length) {
+      dispatch(setFilterProducts(getRangePrice));
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    const getFilterCategory = JSON.parse(localStorage.getItem('setFilterCategory'));
+    if (getFilterCategory !== 'Select category') {
+      dispatch(categoryFilterProducts(getFilterCategory));
+    }
+  }, [dispatch])
 
   return (
     <>

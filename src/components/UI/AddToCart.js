@@ -7,15 +7,20 @@ import DismissibleToasts from './DismissibleToasts';
 import RemoveModal from './RemoveModal';
 import './addToCart.css';
 
-const AddToCart = (props) => {
-
+const AddToCart = () => {
   const dispatch = useDispatch();
   const { toastDetails } = useSelector((state) => state.allproducts);
   const { cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
   console.log('getCart from add to cart==>>>', cartsItem);
-
+  const [removePopUp, setRemovePopUp] = useState(false);
+  const [removeItem, setRemoveItem] = useState({});
   const [cart, setCart] = useState([]);
 
+  let totalQuantity = 0;
+  cartsItem.forEach(item => {
+    totalQuantity += item.quantity
+  });
+  
   useEffect(() => {
     if (cartsItem.length === 0) {
       const getCartItems = JSON.parse(localStorage.getItem('cartItems'));
@@ -24,14 +29,6 @@ const AddToCart = (props) => {
       setCart(cartsItem);
     }
   }, [cartsItem])
-
-  const [removePopUp, setRemovePopUp] = useState(false);
-  const [removeItem, setRemoveItem] = useState({});
-
-  let totalQuantity = 0;
-  cartsItem.forEach(item => {
-    totalQuantity += item.quantity
-  });
 
   const deleteCartItem = (id) => {
     dispatch(removeCartItem(id));
@@ -59,7 +56,6 @@ const AddToCart = (props) => {
           cart.map((item, index) => {
             const { title, image, price, category, quantity } = item;
             return (
-
               <div className='mb-3' key={index}>
                 <div className='addToCart-contain'>
                   <Image className='addToCart-image' src={image} />
@@ -103,8 +99,6 @@ const AddToCart = (props) => {
           </div>
       }
     </div>
-
-
   )
 }
 

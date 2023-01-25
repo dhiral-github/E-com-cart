@@ -68,7 +68,7 @@ export const addnewProduct = (pData) => (dispatch) => {
             type: 'success',
             message: 'Product added successfully',
           }))
-          
+
         }
       })
       .catch((err) => {
@@ -228,20 +228,8 @@ export const setSearchData = (searchText) => (dispatch) => {
 }
 export const setFilterProducts = (filter) => (dispatch) => {
   dispatch({
-    type: "FILTER_PRODUCTS",
+    type: "RANGE_PRICE",
     payload: filter
-  })
-}
-export const clearFilterProducts = (clearProduct) => (dispatch) => {
-  dispatch({
-    type: "CLEAR_FILTER_PRODUCTS",
-    payload: clearProduct
-  })
-}
-export const categoryFilterProducts = (category) => (dispatch) => {
-  dispatch({
-    type: "CATEGORY_FILTER_PRODUCTS",
-    payload: category
   })
 }
 export const setMinPrice = (minPrice) => (dispatch) => {
@@ -256,6 +244,18 @@ export const setMaxPrice = (maxPrice) => (dispatch) => {
     payload: maxPrice
   })
 }
+export const clearFilterProducts = (clearProduct) => (dispatch) => {
+  dispatch({
+    type: "CLEAR_FILTER_PRODUCTS",
+    payload: clearProduct
+  })
+}
+export const categoryFilterProducts = (category) => (dispatch) => {
+  dispatch({
+    type: "CATEGORY_FILTER_PRODUCTS",
+    payload: category
+  })
+}
 export const ratingStarProducts = (rating) => (dispatch) => {
   dispatch({
     type: "RATING_STAR",
@@ -266,5 +266,17 @@ export const wishListProducts = (wishiList) => (dispatch) => {
   dispatch({
     type: "WISH_LIST",
     payload: wishiList
+  })
+}
+export const setLocalReduxWish = (localReduxData) => (dispatch) => {
+  dispatch({
+    type: "SET_LOCAL_REDUX_DATA",
+    payload: localReduxData
+  })
+}
+export const setLocalReduxCart = (localReduxCart) => (dispatch) => {
+  dispatch({
+    type: "SET_LOCAL_REDUX_CART",
+    payload: localReduxCart
   })
 }

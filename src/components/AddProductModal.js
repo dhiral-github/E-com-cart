@@ -80,7 +80,7 @@ const AddProductModal = () => {
 
   const pageTitle = EditProduct.id ? 'Edit Product ' : 'Add Product';
   const buttonTitle = EditProduct.id ? 'Update' : 'Submit';
-  
+
   return (
     <>
       <Modal
