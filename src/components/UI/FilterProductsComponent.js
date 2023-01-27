@@ -7,7 +7,7 @@ import './filterProductsComponent.css'
 
 const FilterProductsComponent = (props) => {
   const dispatch = useDispatch();
-  const { rangePrice, categoryFilter } = useSelector((state) => state.allproducts.filterData);
+  const { rangePrice, categoryFilter, ratingStar } = useSelector((state) => state.allproducts.filterData);
   const { products } = useSelector((state) => state.allproducts);
   const { onChangeRange, onhandleCheck, minChange, maxChange, onRatingStar, filterProductsLength } = props;
 
@@ -78,11 +78,11 @@ const FilterProductsComponent = (props) => {
           <div className='rating-filter'>Customer Ratings</div>
           <div className='RatingProduct'>
             <div>
-              <input type='checkbox' value={4} onChange={onRatingStar} /> 4
+              <input type='checkbox' value={4} onChange={onRatingStar} checked={ratingStar === '4'} /> 4
               <span className="bi bi-star-fill rating-style"> & above</span>
             </div>
             <div>
-              <input type='checkbox' value={3} onChange={onRatingStar} /> 3
+              <input type='checkbox' value={3} onChange={onRatingStar} checked={ratingStar === '3'} /> 3
               <span className="bi bi-star-fill rating-style"> & above</span>
             </div>
           </div>

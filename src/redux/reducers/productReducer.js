@@ -191,6 +191,7 @@ const productReducer = (state = intialState, action) => {
       return {
         ...state,
         filterData: {
+          ...state.filterData,
           rangePrice: [0, 1000],
         }
       }
@@ -229,6 +230,7 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "RATING_STAR": {
+      localStorage.setItem("setPriceRating", JSON.stringify(payload));
       return {
         ...state,
         filterData: {

@@ -57,21 +57,20 @@ const ProductComponent = () => {
       i.title?.toLowerCase().match(searchText?.toLowerCase()) ||
       i.description?.toLowerCase().match(searchText?.toLowerCase()) ||
       i.id === Number(searchText) ||
-      i.category?.toLowerCase().match(searchText?.toLowerCase()))
+      (i.category?.toLowerCase().match(searchText?.toLowerCase())))
     && (i.price >= rangePrice[0] && i.price <= rangePrice[1])
-    && (categoryFilter ? i.category === categoryFilter : true)
+    && ((categoryFilter && categoryFilter !== 'Select category') ? i.category === categoryFilter : true)
     && (ratingStar ? i.rating.rate >= ratingStar : true)
   )
-  console.log('filterProducts==>>>', searchProducts);
 
   useEffect(() => {
-    const wishDataFrmLocal = JSON.parse(localStorage.getItem('wishItems'));
-    const cartsDataFrmLocal = JSON.parse(localStorage.getItem('cartItems'));
-    if (wishDataFrmLocal?.length) {
-      dispatch(setLocalReduxWish(wishDataFrmLocal));
+    const getFilterWish = JSON.parse(localStorage.getItem('wishItems'));
+    const getFilterCart = JSON.parse(localStorage.getItem('cartItems'));
+    if (getFilterWish?.length) {
+      dispatch(setLocalReduxWish(getFilterWish));
     }
-    if (Object.keys(cartsDataFrmLocal)?.length) {
-      dispatch(setLocalReduxCart(cartsDataFrmLocal));
+    if (Object.keys(getFilterCart)?.length) {
+      dispatch(setLocalReduxCart(getFilterCart));
     }
     setFilterData(searchProducts);
   }, [products, searchText, rangePrice, categoryFilter, ratingStar, dispatch])
@@ -87,6 +86,13 @@ const ProductComponent = () => {
     const getFilterCategory = JSON.parse(localStorage.getItem('setFilterCategory'));
     if (getFilterCategory !== 'Select category') {
       dispatch(categoryFilterProducts(getFilterCategory));
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    const getFilterRating = JSON.parse(localStorage.getItem('setPriceRating'));
+    if (getFilterRating) {
+      dispatch(ratingStarProducts(getFilterRating));
     }
   }, [dispatch])
 
