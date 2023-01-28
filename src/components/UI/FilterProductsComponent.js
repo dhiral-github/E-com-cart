@@ -12,8 +12,12 @@ const FilterProductsComponent = (props) => {
   const { onChangeRange, onhandleCheck, minChange, maxChange, onRatingStar, filterProductsLength } = props;
 
   const clearFilter = () => {
-    dispatch(clearFilterProducts());
+    const getClearFilter = JSON.parse(localStorage.getItem('setRangePrice'));
+    if (getClearFilter) {
+      dispatch(clearFilterProducts(getClearFilter));
+    }
   }
+
   const catName = products.map((obj) => obj.category)
   let cateObj = [...new Set(catName)];
 

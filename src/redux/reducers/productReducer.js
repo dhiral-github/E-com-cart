@@ -90,7 +90,7 @@ const productReducer = (state = intialState, action) => {
     case "ADD_TO_CART": {
       const { cartsItem } = state.carts;
       const isItemExist = cartsItem.find((i) => i.id === payload.id);
-      // let cartTotalPrice = 0;
+      let cartTotalPrice = 0;
       if (!isItemExist) {
         cartsItem.push(payload);
       }
@@ -103,13 +103,13 @@ const productReducer = (state = intialState, action) => {
             i.quantity += 1;
           }
         }
-        // cartTotalPrice += i.price * i.quantity;
+        cartTotalPrice += i.price * i.quantity;
       });
-      const cartTotalPrice = cartsItem.reduce((total, i) => total + i.price * i.quantity, 0).toFixed(2);
+      // const cartTotalPrice = cartsItem.reduce((total, i) => total + i.price * i.quantity, 0).toFixed(2);
       const cartData = {
         cartsItem: cartsItem,
         cartsDetail: {
-          totalPrice: Number(cartTotalPrice),
+          totalPrice: Number(cartTotalPrice).toFixed(2),
           totalCartItem: cartsItem.length,
         },
       }
@@ -188,21 +188,13 @@ const productReducer = (state = intialState, action) => {
       }
     }
     case "CLEAR_FILTER_PRODUCTS": {
+      const clearFilter = [0, 1000];
+      localStorage.setItem("setRangePrice", JSON.stringify(clearFilter));
       return {
         ...state,
         filterData: {
           ...state.filterData,
-          rangePrice: [0, 1000],
-        }
-      }
-    }
-    case "CATEGORY_FILTER_PRODUCTS": {
-      localStorage.setItem("setFilterCategory", JSON.stringify(payload));
-      return {
-        ...state,
-        filterData: {
-          ...state.filterData,
-          categoryFilter: payload,
+          rangePrice: clearFilter,
         }
       }
     }
@@ -226,6 +218,16 @@ const productReducer = (state = intialState, action) => {
         filterData: {
           ...state.filterData,
           rangePrice: setMaxPrice
+        }
+      }
+    }
+    case "CATEGORY_FILTER_PRODUCTS": {
+      localStorage.setItem("setFilterCategory", JSON.stringify(payload));
+      return {
+        ...state,
+        filterData: {
+          ...state.filterData,
+          categoryFilter: payload,
         }
       }
     }

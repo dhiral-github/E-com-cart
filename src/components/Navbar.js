@@ -58,8 +58,8 @@ export default function Navbar(props) {
                 key={`${lItem?.label}-list-item`}
                 label={lItem?.label}
                 path={lItem?.path}
-                name={lItem?.name}
                 location={location?.pathname}
+                name={lItem?.name}
                 linkStyle={{ backgroundColor: 'white' }}
                 handleClick={lItem?.onClick}
                 style={lItem?.style}

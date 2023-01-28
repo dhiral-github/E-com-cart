@@ -60,7 +60,7 @@ const ProductComponent = () => {
       (i.category?.toLowerCase().match(searchText?.toLowerCase())))
     && (i.price >= rangePrice[0] && i.price <= rangePrice[1])
     && ((categoryFilter && categoryFilter !== 'Select category') ? i.category === categoryFilter : true)
-    && (ratingStar ? i.rating.rate >= ratingStar : true)
+    && (ratingStar ? i.rating?.rate >= ratingStar : true)
   )
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const ProductComponent = () => {
 
   useEffect(() => {
     const getRangePrice = JSON.parse(localStorage.getItem('setRangePrice'));
-    if (getRangePrice.length) {
+    if (getRangePrice?.length) {
       dispatch(setFilterProducts(getRangePrice));
     }
   }, [dispatch])
@@ -107,7 +107,7 @@ const ProductComponent = () => {
               minChange={handleMinPrice}
               maxChange={handleMaxPrice}
               onRatingStar={handleRatingStar}
-              filterProductsLength={searchProducts.length}
+              filterProductsLength={searchProducts?.length}
             />
           </div>
         }
