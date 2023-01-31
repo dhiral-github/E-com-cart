@@ -33,16 +33,23 @@ const CartPlaceOrder = () => {
     })
 
   }
+
+  const checkEmail = (email) => {
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if (!reg.test(email)) {
+      debugger
+      return true;
+    } else {
+      debugger
+      return false;
+    }
+  };
+
   const deliverProduct = (cartOrderDetail) => {
-    if (!cartOrderDetail.name ||
-      !cartOrderDetail.address ||
-      !cartOrderDetail.contactNumber ||
-      !cartOrderDetail.pinCode ||
-      !cartOrderDetail.CityDistrictTown ||
-      !cartOrderDetail.State
-    ) {
+    if (!cartOrderDetail.name || !cartOrderDetail.address || !cartOrderDetail.contactNumber || !cartOrderDetail.pinCode || !cartOrderDetail.CityDistrictTown || !cartOrderDetail.State || checkEmail(cartOrderDetail.email)) {
       setCartError({
         nameError: !cartOrderDetail.name,
+        emailError: checkEmail(cartOrderDetail.email),
         addressError: !cartOrderDetail.address,
         contactNumberError: !cartOrderDetail.contactNumber,
         pinCodeError: !cartOrderDetail.pinCode,
@@ -68,6 +75,15 @@ const CartPlaceOrder = () => {
           {cartError?.nameError && (
             <div style={{ color: "red" }}>
               Please provide name.
+            </div>
+          )}
+        </div>
+        <div className="form-group">
+          <label className="mb-1 mt-3">Email<span className="text-danger"> *</span></label>
+          <input type="email" placeholder="Enter Email" name='email' className="form-control" onChange={handleChangeOrder} />
+          {cartError?.emailError && (
+            <div style={{ color: "red" }}>
+              Please provide email.
             </div>
           )}
         </div>

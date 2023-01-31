@@ -6,8 +6,6 @@ import {
   selectedProduct,
   setFilterProducts,
   categoryFilterProducts,
-  setMinPrice,
-  setMaxPrice,
   ratingStarProducts,
   setLocalReduxCart,
   setLocalReduxWish
@@ -34,15 +32,6 @@ const ProductComponent = () => {
   }
   const handleCategory = (categoryName) => {
     dispatch(categoryFilterProducts(categoryName))
-  }
-  const handelRange = (e) => {
-    dispatch(setFilterProducts(e.target.value))
-  }
-  const handleMinPrice = (e) => {
-    dispatch(setMinPrice(e.target.value))
-  }
-  const handleMaxPrice = (e) => {
-    dispatch(setMaxPrice(e.target.value))
   }
   const handleRatingStar = (e) => {
     if (e.target.checked) {
@@ -100,10 +89,7 @@ const ProductComponent = () => {
         {
           <div>
             <FilterProductsComponent
-              onChangeRange={handelRange}
               onhandleCheck={handleCategory}
-              minChange={handleMinPrice}
-              maxChange={handleMaxPrice}
               onRatingStar={handleRatingStar}
               filterProductsLength={searchProducts?.length}
             />

@@ -9,7 +9,6 @@ import SuccessOrder from "./components/UI/SuccessOrder";
 import WishListItem from "./components/UI/WishListItem";
 // https://fakestoreapi.com/
 function App() {
-
   return (
     <>
       <Router>

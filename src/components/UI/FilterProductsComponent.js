@@ -2,14 +2,14 @@ import { Slider } from '@mui/material';
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearFilterProducts } from '../../redux/actionCreators/productActions';
+import { clearFilterProducts, setFilterProducts, setMaxPrice, setMinPrice } from '../../redux/actionCreators/productActions';
 import './filterProductsComponent.css'
 
 const FilterProductsComponent = (props) => {
   const dispatch = useDispatch();
   const { rangePrice, categoryFilter, ratingStar } = useSelector((state) => state.allproducts.filterData);
   const { products } = useSelector((state) => state.allproducts);
-  const { onChangeRange, onhandleCheck, minChange, maxChange, onRatingStar, filterProductsLength } = props;
+  const { onhandleCheck, onRatingStar, filterProductsLength } = props;
 
   const clearFilter = () => {
     const getClearFilter = JSON.parse(localStorage.getItem('setRangePrice'));
@@ -40,16 +40,15 @@ const FilterProductsComponent = (props) => {
             value={rangePrice}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
-            onChange={onChangeRange}
+            onChange={(e) => dispatch(setFilterProducts(e.target.value))}
             min={0}
             max={1000}
             style={{ width: '90%', left: '12px' }}
           />
-
         </div>
         <div className='price-range-input'>
-          <input type='number' style={{ width: '100px' }} value={rangePrice[0]} onChange={minChange}></input>
-          <input type='number' style={{ width: '100px' }} value={rangePrice[1]} onChange={maxChange}></input>
+          <input type='number' style={{ width: '100px' }} value={rangePrice[0]} onChange={(e) => dispatch(setMinPrice(e.target.value))}></input>
+          <input type='number' style={{ width: '100px' }} value={rangePrice[1]} onChange={(e) => dispatch(setMaxPrice(e.target.value))}></input>
         </div>
         <span>price {rangePrice[0]} to between {rangePrice[1]}</span>
       </section>
@@ -73,7 +72,6 @@ const FilterProductsComponent = (props) => {
               );
             })}
           </Form.Control>
-
         </div>
       </section>
       <hr />

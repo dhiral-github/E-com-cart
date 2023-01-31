@@ -20,12 +20,10 @@ const SuccessOrder = () => {
         <DismissibleToasts />
       }
       <div className='success-placed mb-3'>🙂 Your Order has been successfully placed. Your item will be delivered within 5 to 7 working days.</div>
-
       {
         cartsItem.map((item, index) => {
           const { title, image, price, quantity } = item;
           return (
-
             <div className='mb-3 my-3 col-md-7' key={index}>
               <div className='successOrder-contain'>
                 <div className='order-body'>
