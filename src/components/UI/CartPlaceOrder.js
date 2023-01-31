@@ -119,17 +119,14 @@ const CartPlaceOrder = () => {
         <div className="form-group">
           <label className="mb-1 mt-3">Landmark(Optional)</label>
           <input type="text" placeholder="Enter Landmark(Optional)" name='landmarkOptional' className="form-control" onChange={handleChangeOrder} />
-
         </div>
         <div className="form-group">
           <label className="mb-1 mt-3">Alternate Phone(Optional)</label>
           <input type="number" placeholder="Enter alternate Phone" name='alternatePhone' className="form-control" onChange={handleChangeOrder} />
-
         </div>
         <p className="mb-0 mt-3 my-3">
           <Button className="btn btn-primary btn-lg w-10 text-uppercase modal-button" onClick={() => deliverProduct(cartOrder)} >SAVE AND DELIVER HERE</Button>
         </p>
-
       </div>
       <div className='box-detail'>
         <div className='box-shadow'>
