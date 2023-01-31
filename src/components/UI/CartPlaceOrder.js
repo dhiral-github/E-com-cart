@@ -46,7 +46,14 @@ const CartPlaceOrder = () => {
   };
 
   const deliverProduct = (cartOrderDetail) => {
-    if (!cartOrderDetail.name || !cartOrderDetail.address || !cartOrderDetail.contactNumber || !cartOrderDetail.pinCode || !cartOrderDetail.CityDistrictTown || !cartOrderDetail.State || checkEmail(cartOrderDetail.email)) {
+    if (!cartOrderDetail.name ||
+      !cartOrderDetail.address ||
+      !cartOrderDetail.contactNumber ||
+      !cartOrderDetail.pinCode ||
+      !cartOrderDetail.CityDistrictTown ||
+      !cartOrderDetail.State ||
+      checkEmail(cartOrderDetail.email)
+    ) {
       setCartError({
         nameError: !cartOrderDetail.name,
         emailError: checkEmail(cartOrderDetail.email),
