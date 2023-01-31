@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { suucessOrderData } from '../../redux/actionCreators/productActions';
+import { useNavigate } from 'react-router-dom';
 import './cartPlaceOrder.css'
 
 const CartPlaceOrder = () => {
-  const [cartOrder, setcartOrder] = useState({})
   const dispatch = useDispatch();
-  let totalQuantity = 0;
+  const navigate = useNavigate();
+  const defaultFormData = {
+    name: '',
+    address: '',
+    contactNumber: '',
+    pinCode: '',
+    CityDistrictTown: '',
+    State: '',
+  }
+  const [cartOrder, setcartOrder] = useState(defaultFormData)
+  const [cartError, setCartError] = useState(false);
   const { cartsItem, cartsDetail } = useSelector((state) => state.allproducts.carts);
+  let totalQuantity = 0;
 
   cartsItem.forEach(item => {
     totalQuantity += item.quantity
@@ -24,65 +34,102 @@ const CartPlaceOrder = () => {
 
   }
   const deliverProduct = (cartOrderDetail) => {
-    dispatch(suucessOrderData({
-      ...cartOrderDetail,
-    }))
-    setcartOrder({});
+    if (!cartOrderDetail.name ||
+      !cartOrderDetail.address ||
+      !cartOrderDetail.contactNumber ||
+      !cartOrderDetail.pinCode ||
+      !cartOrderDetail.CityDistrictTown ||
+      !cartOrderDetail.State
+    ) {
+      setCartError({
+        nameError: !cartOrderDetail.name,
+        addressError: !cartOrderDetail.address,
+        contactNumberError: !cartOrderDetail.contactNumber,
+        pinCodeError: !cartOrderDetail.pinCode,
+        CityDistrictTownError: !cartOrderDetail.CityDistrictTown,
+        StateError: !cartOrderDetail.State,
+      });
+    } else {
+      dispatch(suucessOrderData({
+        ...cartOrderDetail,
+      }))
+      navigate('/successOrder');
+      setcartOrder(defaultFormData);
+    }
   }
 
   return (
     <div className='col-lg-8 cartPlace-container' >
       <div className="col-lg-6">
         <div className='delivery-add mt-2 mb-2'>Delivery Address</div>
-        <Form style={{ border: '1px solid aliceblue' }}>
-          <Form.Group className="mb-4">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter Name" name='name' onChange={handleChangeOrder} />
-          </Form.Group>
+        <div className="form-group">
+          <label className="mb-1 mt-3">Name<span className="text-danger"> *</span></label>
+          <input type="text" placeholder="Enter Name" name='name' className="form-control" onChange={handleChangeOrder} />
+          {cartError?.nameError && (
+            <div style={{ color: "red" }}>
+              Please provide name.
+            </div>
+          )}
+        </div>
+        <div className="form-group">
+          <label className="mb-1 mt-3">Address<span className="text-danger"> *</span></label>
+          <input type="text" placeholder="Enter Address" name='address' className="form-control" onChange={handleChangeOrder} />
+          {cartError?.addressError && (
+            <div style={{ color: "red" }}>
+              Please provide address.
+            </div>
+          )}
+        </div>
+        <div className="form-group">
+          <label className="mb-1 mt-3">Contact Number<span className="text-danger"> *</span></label>
+          <input type="number" placeholder="Enter Contact Number" name='contactNumber' className="form-control" onChange={handleChangeOrder} />
+          {cartError?.contactNumberError && (
+            <div style={{ color: "red" }}>
+              Please provide Contact Number.
+            </div>
+          )}
+        </div>
+        <div className="form-group">
+          <label className="mb-1 mt-3">Pin Code<span className="text-danger"> *</span></label>
+          <input type="number" placeholder="Enter Pin code number" name='pinCode' className="form-control" onChange={handleChangeOrder} />
+          {cartError?.pinCodeError && (
+            <div style={{ color: "red" }}>
+              Please provide PinCode.
+            </div>
+          )}
+        </div>
+        <div className="form-group">
+          <label className="mb-1 mt-3">City/District/Town<span className="text-danger"> *</span></label>
+          <input type="text" placeholder="Enter City/District/Town" name='CityDistrictTown' className="form-control" onChange={handleChangeOrder} />
+          {cartError?.CityDistrictTownError && (
+            <div style={{ color: "red" }}>
+              Please provide City/District/Town.
+            </div>
+          )}
+        </div>
+        <div className="form-group">
+          <label className="mb-1 mt-3">State<span className="text-danger"> *</span></label>
+          <input type="text" placeholder="Enter State" name='State' className="form-control" onChange={handleChangeOrder} />
+          {cartError?.StateError && (
+            <div style={{ color: "red" }}>
+              Please provide State.
+            </div>
+          )}
+        </div>
+        <div className="form-group">
+          <label className="mb-1 mt-3">Landmark(Optional)</label>
+          <input type="text" placeholder="Enter Landmark(Optional)" name='landmarkOptional' className="form-control" onChange={handleChangeOrder} />
 
-          <Form.Group className="mb-4">
-            <Form.Label>Address</Form.Label>
-            <Form.Control type="text" placeholder="Enter Address" name='address' onChange={handleChangeOrder} />
-          </Form.Group>
+        </div>
+        <div className="form-group">
+          <label className="mb-1 mt-3">Alternate Phone(Optional)</label>
+          <input type="number" placeholder="Enter alternate Phone" name='alternatePhone' className="form-control" onChange={handleChangeOrder} />
 
-          <Form.Group className="mb-4">
-            <Form.Label>Contact number</Form.Label>
-            <Form.Control type="number" placeholder="Enter Number" name='contactNumber' onChange={handleChangeOrder} />
-          </Form.Group>
+        </div>
+        <p className="mb-0 mt-3 my-3">
+          <Button className="btn btn-primary btn-lg w-10 text-uppercase modal-button" onClick={() => deliverProduct(cartOrder)} >SAVE AND DELIVER HERE</Button>
+        </p>
 
-          <Form.Group className="mb-4">
-            <Form.Label>Pin code</Form.Label>
-            <Form.Control type="number" placeholder="Enter Pin code number" name='pinCode' onChange={handleChangeOrder} />
-          </Form.Group>
-
-          <Form.Group className="mb-4">
-            <Form.Label>City/District/Town</Form.Label>
-            <Form.Control type="text" placeholder="Enter City/District/Town" name='CityDistrictTown' onChange={handleChangeOrder} />
-          </Form.Group>
-
-          <Form.Group className="mb-4">
-            <Form.Label>State</Form.Label>
-            <Form.Control type="text" placeholder="Enter State" name='State' onChange={handleChangeOrder} />
-          </Form.Group>
-
-          <Form.Group className="mb-4">
-            <Form.Label>Landmark(Optional)</Form.Label>
-            <Form.Control type="text" placeholder="Enter Landmark(Optional)" name='landmarkOptional' onChange={handleChangeOrder} />
-          </Form.Group>
-
-          <Form.Group className="mb-4">
-            <Form.Label>Alternate Phone(Optional)</Form.Label>
-            <Form.Control type="text" placeholder="Enter Alternate Phone(Optional)" name='alternatePhone' onChange={handleChangeOrder} />
-          </Form.Group>
-
-          <div style={{ display: 'flex' }}>
-            <Link to={`/successOrder`}>
-              <Button className='save-deliver-button' onClick={() => deliverProduct(cartOrder)}>SAVE AND DELIVER HERE</Button>
-            </Link>
-
-            <Button className='cart-cancel mx-3'>CANCEL</Button>
-          </div>
-        </Form>
       </div>
       <div className='box-detail'>
         <div className='box-shadow'>
@@ -95,7 +142,6 @@ const CartPlaceOrder = () => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

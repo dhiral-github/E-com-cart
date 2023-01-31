@@ -52,16 +52,14 @@ const ProductComponent = () => {
     }
   }
 
-  const searchProducts = products?.filter(i =>
-    (Math.trunc(i.price) === Number(searchText) ||
-      i.title?.toLowerCase().match(searchText?.toLowerCase()) ||
-      i.description?.toLowerCase().match(searchText?.toLowerCase()) ||
-      i.id === Number(searchText) ||
-      (i.category?.toLowerCase().match(searchText?.toLowerCase())))
+  const searchProducts = products?.filter(i => (Math.trunc(i.price) === Number(searchText) ||
+    i.title?.toLowerCase().match(searchText?.toLowerCase()) ||
+    i.description?.toLowerCase().match(searchText?.toLowerCase()) ||
+    i.id === Number(searchText) ||
+    (i.category?.toLowerCase().match(searchText?.toLowerCase())))
     && (i.price >= rangePrice[0] && i.price <= rangePrice[1])
     && ((categoryFilter && categoryFilter !== 'Select category') ? i.category === categoryFilter : true)
-    && (ratingStar ? i.rating?.rate >= ratingStar : true)
-  )
+    && (ratingStar ? i.rating?.rate >= ratingStar : true))
 
   useEffect(() => {
     const getFilterWish = JSON.parse(localStorage.getItem('wishItems'));
