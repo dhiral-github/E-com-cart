@@ -20,9 +20,6 @@ export default function Navbar(props) {
     dispatch(showproductModal(true),
     )
   }
-  const handleSearch = (e) => {
-    dispatch(setSearchData(e.target.value));
-  }
 
   const listItemArray = [
     {
@@ -69,7 +66,7 @@ export default function Navbar(props) {
             <AddProductModal />
             <div style={{ marginTop: '15px' }}>
               <div>
-                <input placeholder="Search for products, category and more" style={{ width: '310px' }} name='search' onChange={handleSearch} />
+                <input placeholder="Search for products, category and more" style={{ width: '310px' }} name='search' onChange={(e) => dispatch(setSearchData(e.target.value))} />
               </div>
             </div>
           </ul>
